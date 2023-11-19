@@ -11,7 +11,10 @@ use App\Helpers\TableHelper;
 
 use App\Models\ProductionOrder;
 use App\Models\Material;
-
+use App\Models\Catalog;
+use App\Models\User;
+use App\Models\CustomerOrder;
+use App\Models\SalesOrder;
 
 
 class SellerController extends Controller
@@ -25,10 +28,30 @@ class SellerController extends Controller
     public function index()
     {
         $menu = SidebarHelper::list(Auth::user()->role_id);
+
+        $curr_user = Auth::user()->id;
+
+        $countCart = CustomerOrder::where('user_id','=',$curr_user)->get();
+        $countPayment = SalesOrder::where('user_id','=',$curr_user)->get();
+        $countCatalog = Catalog::where('user_id','=',$curr_user)->get();
+        $countProductionOrder = ProductionOrder::where('user_id','=',$curr_user)->get();
+        $countMaterial = Material::where('user_id','=',$curr_user)->get();
+
+        $data = [
+            'countCart' => $countCart->count(),
+            'countPayment' => $countPayment->count(),
+            'countProductionOrder' => $countProductionOrder->count(),
+            'countCatalog' => $countCatalog->count(),
+            'countMaterial' => $countMaterial->count()
+        ];
+
         
         return view(
             'seller.dashboard',
-            ['menu'=>$menu]
+            [
+                'menu' => $menu,
+                'data' => $data
+            ],
         );
     }
 
@@ -36,11 +59,13 @@ class SellerController extends Controller
     {        
         // Menu
         $menu = SidebarHelper::list(Auth::user()->role_id);
+        $curr_user = Auth::user()->id;
 
         $material = Material::all();
 
         // Inisiate Data
-        $production_order = ProductionOrder::all();
+        // $curr_user = Auth::user()->id;
+        $production_order = ProductionOrder::where('user_id','=',$curr_user)->get();
         $table = new ProductionOrder;
 
                 

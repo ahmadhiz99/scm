@@ -146,6 +146,8 @@ Route::group(['prefix'=>'seller', 'middleware'=>['isSeller','auth','PreventBackH
     
     // Profile
     Route::get('profile',[ProfileController::class,'index']);
+    Route::post('edit-profile',[ProfileController::class,'editProfile']);
+
     
 });
 
@@ -161,6 +163,7 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     Route::get('detail/{id}/finish-payment',[KonsumenController::class,'finish_payment'])->name('konsumen.finish-payment');
 
     Route::get('profile',[KonsumenController::class,'profile']);
+    Route::post('edit-profile',[KonsumenController::class,'editProfile']);
 
 });
 

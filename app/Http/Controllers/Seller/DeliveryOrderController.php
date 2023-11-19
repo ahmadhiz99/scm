@@ -27,7 +27,8 @@ class DeliveryOrderController extends Controller
     }
 
     public function configDB_all(){
-        return DeliveryOrder::all();
+        $curr_user = Auth::user()->id;
+        return DeliveryOrder::where('user_id','=',$curr_user)->get();
     }
 
     public function configDB_find($id){

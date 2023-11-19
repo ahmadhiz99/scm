@@ -37,7 +37,8 @@ class MaterialController extends Controller
         // Menu
         $menu = SidebarHelper::list(Auth::user()->role_id);
 
-        $materialCategory = MaterialCategory::all();
+        $curr_user = Auth::user()->id;
+        $materialCategory = MaterialCategory::where('user_id','=',$curr_user)->get();
 
         // Inisiate Data
         $material = Material::all();

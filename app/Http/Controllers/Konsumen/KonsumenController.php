@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Helpers\SidebarHelper;
 use App\Models\Catalog;
@@ -65,17 +67,11 @@ class KonsumenController extends Controller
 
         $menu = SidebarHelper::list(Auth::user()->role_id);
 
-        // $dataContent = Catalog::all();
-
         $dataContent = DB::table('catalogs')
             ->select('catalog_categories.*','users.*','catalogs.*')
             ->join('users', 'users.id', '=', 'catalogs.user_id')
             ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
-            // ->where('customer_orders.user_id', Auth::user()->id)
-            // ->orderBy('customer_orders.id','desc')
             ->get();
-
-        // dd($dataContent);
 
         return view(
             'konsumen.dashboard',
@@ -296,12 +292,41 @@ class KonsumenController extends Controller
 
         $curr_user = Auth::user()->id;
         $user = User::find($curr_user);
-        // dd($user);
+        // dd(Crypt::decrypt($user->password));
+        $user->password = Crypt::decrypt($user->password);
 
-        return view('component.profile.index',[
+        return view('component.profile.profile2',[
             'menu'=>$menu,
             'user'=>$user
-    ]);
-    
+        ]);
+    }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editProfile(Request $request)
+    {
+        $menu = SidebarHelper::list(Auth::user()->role_id);
+        
+        $curr_user = Auth::user()->id;
+        $user = User::find($curr_user);
+        // dd($user);
+        
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->password = Crypt::encrypt($request->password);
+        $user->rekening = $request->rekening;
+        $user->bank = $request->bank;
+
+        if($user->save()){
+            return back()->with('success', 'Selamat Data dimasukan!');
+        }else{
+            return back()->with('failed', 'Maaf Data dimasukan!');
+        }    
     }
 }

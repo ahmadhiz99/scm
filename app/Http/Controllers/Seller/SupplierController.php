@@ -27,7 +27,8 @@ class SupplierController extends Controller
     }
 
     public function configDB_all(){
-        return Supplier::all();
+        $curr_user = Auth::user()->id;
+        return Supplier::where('user_id','=',$curr_user)->get();
     }
 
     public function configDB_find($id){

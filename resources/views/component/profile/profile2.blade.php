@@ -25,7 +25,7 @@
                       <div class="media-body">
                         <div class="media-title">
 
-                          <form action="/seller/edit-profile" method="POST">
+                          <form action="/konsumen/edit-profile" method="POST">
                             @csrf
                             <div class="form-group">
                               <label for="exampleInputName1">Name</label>

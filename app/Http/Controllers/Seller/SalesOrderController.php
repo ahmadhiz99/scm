@@ -26,7 +26,8 @@ class SalesOrderController extends Controller
     }
 
     public function configDB_all(){
-        return SalesOrder::all();
+        $curr_user = Auth::user()->id;
+        return SalesOrder::where('user_id','=',$curr_user)->get();
     }
 
     public function configDB_find($id){

@@ -209,7 +209,6 @@ class RoleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-
         $curr_user = Auth::user()->id;
         $db_find = $this->configDB_find($id);
 

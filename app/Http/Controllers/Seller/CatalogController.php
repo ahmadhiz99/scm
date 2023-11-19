@@ -40,9 +40,10 @@ class CatalogController extends Controller
         $CatalogCategory = CatalogCategory::all();
 
         // Inisiate Data
-        $catalog = Catalog::all();
-        $table = new Catalog;
+         $curr_user = Auth::user()->id;
+         $catalog = Catalog::where('user_id','=',$curr_user)->get();
 
+        $table = new Catalog;
                 
         // Datatable
         $tableConfig = [

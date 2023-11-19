@@ -34,8 +34,8 @@ class UserController extends Controller
         return New User;
     }
 
-    public function configDB_find(){
-        return New User;
+    public function configDB_find($id){
+        return User::find($id);
     }
 
 
@@ -60,7 +60,7 @@ class UserController extends Controller
         $user = User::all();
         $table = new User;
         $role = $this->configDB_role();
-                
+        
          // Datatable
          $tableConfig = [
             'field_block' => [
@@ -280,10 +280,10 @@ class UserController extends Controller
         return view(
             'admin.user',                              
             [
-                'menu'=>$menu,
-                'user'=>$user,
-                'data_table'=>$columTable,
-                'tableConfig'=>$tableConfig
+                'menu' => $menu,
+                'user' => $user,
+                'data_table' => $columTable,
+                'tableConfig' => $tableConfig
             ]
         );
 
@@ -306,15 +306,12 @@ class UserController extends Controller
         }
             $db_new->user_id = $curr_user;       
             
-            // dd($db_new);
-
         if($db_new->save()){
             return back()->with('success', 'Selamat Data dimasukan!');
         }else{
             return back()->with('failed', 'Selamat Data dimasukan!');
 
         }
-        // dd($db_new);
     }
 
     /**
@@ -333,7 +330,8 @@ class UserController extends Controller
             if($key == '_token')continue;
             $db_find->$key = $data;            
         }
-            $db_find->user_id = $curr_user;            
+            $db_find->user_id = $curr_user;
+            
 
         if($db_find->save()){
             return back()->with('success', 'Selamat Data dimasukan!');
@@ -341,10 +339,9 @@ class UserController extends Controller
             return back()->with('failed', 'Selamat Data dimasukan!');
 
         }
-        // dd($db_find);
     }
-
-
+    
+    
     /**
      * Update the specified resource in storage.
      *
@@ -356,7 +353,8 @@ class UserController extends Controller
     {
         $curr_user = Auth::user()->id;
         $db_find = $this->configDB_find($id);
-
+        // dd($db_find);
+        
         foreach($request->request as $key => $data){
             if($data == null )break;
             

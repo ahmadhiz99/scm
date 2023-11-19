@@ -27,7 +27,8 @@ class PurchaseOrderController extends Controller
     }
 
     public function configDB_all(){
-        return PurchaseOrder::all();
+        $curr_user = Auth::user()->id;
+        return PurchaseOrder::where('user_id','=',$curr_user)->get();
     }
 
     public function configDB_find($id){

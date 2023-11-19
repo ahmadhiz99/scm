@@ -25,7 +25,8 @@ class CatalogCategoryController extends Controller
     }
 
     public function configDB_all(){
-        return CatalogCategory::all();
+        $curr_user = Auth::user()->id;
+        return CatalogCategory::where('user_id','=',$curr_user)->get();
     }
 
     public function configDB_find($id){
