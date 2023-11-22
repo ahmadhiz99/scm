@@ -34,8 +34,8 @@ class RoleController extends Controller
         return New Roles;
     }
 
-    public function configDB_find(){
-        return New Roles;
+    public function configDB_find($id){
+        return Roles::find($id);
     }
 
 

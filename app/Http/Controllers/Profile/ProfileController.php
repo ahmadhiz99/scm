@@ -15,6 +15,15 @@ use App\Models\User;
 class ProfileController extends Controller
 {
     /**
+     * DB config.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function configDB(){
+        return New Users;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -26,8 +35,11 @@ class ProfileController extends Controller
 
         $curr_user = Auth::user()->id;
         $user = User::find($curr_user);
-        $user->password = Crypt::decrypt($user->password);
+        // $user->password = Crypt::decrypt($user->password);
 
+        // if(Auth::user()->role_id == 1){
+
+        // }
 
         return view('component.profile.index',[
             'menu'=>$menu,
@@ -52,7 +64,7 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->address = $request->address;
-        $user->password = Crypt::encrypt($request->password);
+        // $user->password = Hash::make($request->password);
         $user->rekening = $request->rekening;
         $user->bank = $request->bank;
 

@@ -61,6 +61,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHis
     Route::post('add-role',[RoleController::class,'add'])->name('role.add-role');
     Route::post('edit-role/{id}',[RoleController::class,'edit'])->name('role.edit-role');
     Route::post('delete-role/{id}',[RoleController::class,'delete'])->name('role.delete-role');
+
+     // Profile
+     Route::get('profile',[ProfileController::class,'index']);
+     Route::post('edit-profile',[ProfileController::class,'editProfile']);
     
 });
 

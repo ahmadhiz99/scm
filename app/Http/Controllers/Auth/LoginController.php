@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -70,7 +73,6 @@ class LoginController extends Controller
 
         // $i = 0;
         // foreach($cust_order as $key => $data){
-
         // };
 
         // dd($cust_order);
@@ -84,7 +86,21 @@ class LoginController extends Controller
             'password'=>'required'
         ]);
 
-        if( auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password'])) ){
+        // $user = User::where('email', $request->input('email'))->first();
+        // $decrypted = Crypt::decrypt($user->password); 
+        // if ($input) {
+        //     if ($input['password'] == $decrypted) {
+                // Auth::login($user);
+
+        //         dd('text');
+        //         return redirect()->intended('dashboard')->with('success');
+        //         }
+        //     }
+        //     return Redirect::back()->with('error');
+         
+
+        if( auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
+        // if( auth()->attempt(array('email'=>$input['email'], 'password'=>Crypt::encrypt($input['password']))) ){
 
             if( auth()->user()->role_id == 1 ){
                 return redirect()->route('admin.dashboard');
@@ -98,8 +114,11 @@ class LoginController extends Controller
             else if( auth()->user()->role_id == 4 ){
                 return redirect()->route('suplier.dashboard');
            }else{
-               return redirect()->route('login')->with('error','Email and password are wrong');
-           }
+            return back()->with('failed', 'Selamat Data dimasukan!');
+            //    return redirect()->route('login')->with('error','Email and password are wrong');
+            }
+        }else{
+            return back()->with('failed', 'Maaf Username Atau Password Salah!');
         }
     }
 }

@@ -293,7 +293,7 @@ class KonsumenController extends Controller
         $curr_user = Auth::user()->id;
         $user = User::find($curr_user);
         // dd(Crypt::decrypt($user->password));
-        $user->password = Crypt::decrypt($user->password);
+        // $user->password = Crypt::decrypt($user->password);
 
         return view('component.profile.profile2',[
             'menu'=>$menu,

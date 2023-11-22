@@ -43,10 +43,10 @@
                               <label for="exampleInputAddress1">Alamat</label>
                               <input name="address" type="text" class="form-control" id="exampleInputAddress1" aria-describedby="AddressHelp" value="{{$user->address}}" placeholder="Enter Address">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label for="exampleInputPassword1">Password</label>
                               <input name="password" type="password" class="form-control" id="exampleInputPassword1" value="{{$user->password}}" placeholder="Password">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                               <label for="exampleInputRekening1">Rekening</label>
                               <input name="rekening" type="text" class="form-control" id="exampleInputRekening1" aria-describedby="RekeningHelp" value="{{$user->rekening}}" placeholder="Enter Rekening">

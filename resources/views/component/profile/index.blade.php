@@ -5,7 +5,17 @@
 
 <section class="section w-100">
           <div class="section-header">
-            <h1>Profile</h1>
+            <h1>Profile 
+              <?php
+                if( auth()->user()->role_id == 1 ){
+                  echo 'Admin';
+                }else if( auth()->user()->role_id == 2 ){
+                  echo 'UMKM';
+                }else if( auth()->user()->role_id == 3 ){
+                  echo 'Konsumen';
+                }
+                ?>
+            </h1>
           </div>
           <div class="row">
             <div class="col-lg-12 col-md-6 col-sm-6 col-3">
@@ -25,7 +35,7 @@
                       <div class="media-body">
                         <div class="media-title">
 
-                          <form action="/seller/edit-profile" method="POST">
+                          <form action="edit-profile" method="POST">
                             @csrf
                             <div class="form-group">
                               <label for="exampleInputName1">Name</label>
@@ -43,10 +53,10 @@
                               <label for="exampleInputAddress1">Alamat</label>
                               <input name="address" type="text" class="form-control" id="exampleInputAddress1" aria-describedby="AddressHelp" value="{{$user->address}}" placeholder="Enter Address">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                               <label for="exampleInputPassword1">Password</label>
                               <input name="password" type="password" class="form-control" id="exampleInputPassword1" value="{{$user->password}}" placeholder="Password">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                               <label for="exampleInputRekening1">Rekening</label>
                               <input name="rekening" type="text" class="form-control" id="exampleInputRekening1" aria-describedby="RekeningHelp" value="{{$user->rekening}}" placeholder="Enter Rekening">

@@ -40,15 +40,15 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                            <label for="role_id" class="col-md-4 col-form-label text-md-end">{{ __('Mendaftar Sebagai') }}</label>
 
                             <div class="col-md-6">
                                 <!-- <input id="role_id" type="role_id" class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id"> -->
 
-                                <select id="role_id" aria-label="Default select example" class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id">
-                                    <option value="null">-- Choose Role --</option>
+                                <select readonly id="role_id" aria-label="Default select example" class="form-control @error('role_id') is-invalid @enderror" name="role_id" value="{{ old('role_id') }}" required autocomplete="role_id">
+                                    <!-- <option value="null">-- Choose Role --</option> -->
                                     <option value="2">UMKM</option>
-                                    <option value="3">Konsumen</option>
+                                    <!-- <option value="3">Konsumen</option> -->
                                 </select>
 
                                 @error('role_id')
