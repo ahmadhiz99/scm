@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2023 at 02:21 PM
+-- Generation Time: Nov 22, 2023 at 03:43 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -52,7 +52,8 @@ INSERT INTO `catalogs` (`id`, `product_name`, `stock`, `unit_price`, `image`, `d
 (7, 'vas bunga batik', 12, 90000, '1699284226.png', 'vasbunga', '1', 1, 8, '2023-11-06 15:26:45', '2023-11-06 08:26:45'),
 (8, 'testvasbunga3', 2000, 13000, '1699285434.webp', 'vasbunga batiks', '1', 1, 8, '2023-11-06 15:43:54', '2023-11-06 08:43:54'),
 (9, 'Test4', 200, 15000, '1699874273.webp', 'test4 catalog', '1', 1, 8, '2023-11-13 04:17:53', '2023-11-13 04:17:53'),
-(10, 'test piring', 120, 20000, '1699878189.jpg', 'piring cantik', '1', 1, 8, '2023-11-13 05:23:09', '2023-11-13 05:23:09');
+(10, 'test piring', 120, 20000, '1699878189.jpg', 'piring cantik', '1', 1, 8, '2023-11-13 05:23:09', '2023-11-13 05:23:09'),
+(11, 'test', 120, 20000, '1700377407.jpg', 'testing', '1', 1, 18, '2023-11-19 00:03:27', '2023-11-19 00:03:27');
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,8 @@ CREATE TABLE `catalog_categories` (
 INSERT INTO `catalog_categories` (`id`, `catalog_category_name`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'category01', 8, NULL, '2023-11-13 04:40:49', NULL),
 (2, 'category02', 8, NULL, '2023-11-13 04:40:55', NULL),
-(3, 'kategori 3', 8, '2023-11-13 04:41:05', '2023-11-13 04:41:05', NULL);
+(3, 'kategori 3', 8, '2023-11-13 04:41:05', '2023-11-13 04:41:05', NULL),
+(4, 'Category 1', 18, '2023-11-18 23:59:08', '2023-11-18 23:59:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,8 @@ CREATE TABLE `delivery_orders` (
 INSERT INTO `delivery_orders` (`id`, `quantity`, `delivery_date`, `courier`, `status`, `description`, `height`, `weight`, `sales_order_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (4, 2, '2023-10-03', '1', '1', 'descdeliv', 2.00, 2.00, 1, 8, '2023-10-26 06:42:59', '2023-10-26 07:09:40', NULL),
 (5, 200, '2023-11-14', '1', '1', 'desc test', 20.00, 10.00, 1, 8, '2023-11-13 04:19:06', '2023-11-13 04:19:06', NULL),
-(6, 12, '2023-11-14', '1', '1', 'tes', 3.00, 4.00, 7, 8, '2023-11-13 04:19:45', '2023-11-13 04:19:45', NULL);
+(6, 12, '2023-11-14', '1', '1', 'tes', 3.00, 4.00, 7, 8, '2023-11-13 04:19:45', '2023-11-13 04:19:45', NULL),
+(7, 100, '2023-11-19', '1', 'test', 'testing', 10.00, 10.00, 6, 18, '2023-11-19 00:06:57', '2023-11-19 00:06:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -227,7 +230,8 @@ INSERT INTO `material_categories` (`id`, `material_category_name`, `user_id`, `c
 (3, 'Perkakas', 8, '2023-10-25 16:03:47', '2023-10-25 16:04:47', '2023-10-25 16:04:47'),
 (4, 'Perkakas', 8, '2023-10-25 16:04:10', '2023-10-25 16:39:00', '2023-10-25 16:39:00'),
 (5, 'Bahan Matang', 8, '2023-10-25 16:04:17', '2023-10-25 16:04:52', '2023-10-25 16:04:52'),
-(6, 'haha', 8, '2023-10-25 16:39:05', '2023-10-25 16:39:05', NULL);
+(6, 'haha', 8, '2023-10-25 16:39:05', '2023-10-25 16:39:05', NULL),
+(7, 'material cat 1', 18, '2023-11-19 00:06:22', '2023-11-19 00:06:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -465,7 +469,8 @@ INSERT INTO `roles` (`id`, `role_name`, `level`, `user_id`, `created_at`, `updat
 (1, 'admin', 1, 0, '2023-09-22 11:19:56', NULL, NULL),
 (2, 'umkm', 2, 0, '2023-09-22 11:19:56', NULL, NULL),
 (3, 'customer', 3, 0, '2023-09-22 11:19:56', NULL, NULL),
-(4, 'test', 1, 8, '2023-10-29 15:54:31', '2023-10-29 15:54:31', NULL);
+(5, 'distributor', 8, 8, '2023-11-22 07:23:31', '2023-11-22 07:25:57', '2023-11-22 07:25:57'),
+(6, 'distributor', 5, 8, '2023-11-22 07:23:53', '2023-11-22 07:25:59', '2023-11-22 07:25:59');
 
 -- --------------------------------------------------------
 
@@ -589,6 +594,7 @@ CREATE TABLE `users` (
   `bank` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT 0,
+  `remember_token` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -598,23 +604,28 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `phone`, `address`, `email`, `password`, `rekening`, `bank`, `role_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'John Doe', NULL, NULL, 'johndoe@gmail.com', '$2y$10$qY7Kw6oITLOKwaReFPCY.OYKrXm.ugNSh7gZtPBiv27h6xRqZ/gga', NULL, NULL, 1, 0, NULL, NULL, NULL),
-(2, 'Gerabah Mbah Karyo', NULL, NULL, 'mbahkaryo@gmail.com', '$2y$10$c5BKDrIRicB0bz/Xr9hB/eyknXsyusch44erS7w0zJAi8xYRVKclC', NULL, NULL, 2, 0, NULL, NULL, NULL),
-(3, 'Ahmad Hizbullah Akbar', NULL, NULL, 'akbar@gmail.com', '$2y$10$FGQIKtgDg4UAE7ccjV7bEunHFIzoaf2Yz3bp1YamQ2YMDwtFBNpva', NULL, NULL, 3, 0, NULL, NULL, NULL),
-(4, 'distributor1', NULL, NULL, 'distributor1@gmail.com', '$2y$10$7yZiJbLoE5V435d7K6UUouxK2esnU.KWB7qCRouZJeTCUlKBA7uWy', NULL, NULL, 2, 0, '2023-09-22 22:15:37', '2023-09-22 22:15:37', NULL),
-(8, 'admin', '895613694343', NULL, 'admin@gmail.com', '$2y$10$YxjJgV7FSAleyOwrUGShfemFwgwXdC2XH8QS3p5WR2DCGgq2GGkLC', NULL, NULL, 2, 0, '2023-09-23 01:29:51', '2023-09-23 01:29:51', NULL),
-(9, 'konsumen1', NULL, NULL, 'konsumen1@gmail.com', '$2y$10$ipXEdE/yWR2TR3IKVje6MeshPQ426C0dGtISS620yica2vZrf1Bg6', NULL, NULL, 3, 0, '2023-09-29 21:39:42', '2023-09-29 21:39:42', NULL),
-(10, 'suplier1', NULL, NULL, 'suplier1@gmail.com', '$2y$10$DxnHCXdOu0WzKQhTCauVxeA5DCH7Wlpry5/jaowctz4yL6q6HRYAa', NULL, NULL, 4, 0, '2023-09-29 21:44:12', '2023-09-29 21:44:12', NULL),
-(11, 'suplier2', NULL, NULL, 'suplier2@gmail.com', '$2y$10$LVAOPvua9BI1ridVOIpYwOKsys5ej5vI7F.O.cKV4JFlKDlPJEN1G', NULL, NULL, 4, 0, '2023-09-29 21:45:55', '2023-09-29 21:45:55', NULL),
-(12, 'suplier3', NULL, NULL, 'suplier3@gmail.com', '$2y$10$DL.KHdgkS8WJO8eUGaRwwuQgdS4Dp8ommh5wcK0YBufiOFiniGIzC', NULL, NULL, 4, 0, '2023-09-29 21:49:27', '2023-09-29 21:49:27', NULL),
-(13, 'distributor2', NULL, NULL, 'distributor2@gmail.cm', '$2y$10$ksbdMNj2nH2KCybl/Sy7L.XgfOaHMDorE9TXi9MACdgIetpvaRo6a', NULL, NULL, 2, 0, '2023-09-29 21:58:48', '2023-09-29 21:58:48', NULL),
-(14, 'distributor4', NULL, NULL, 'distributor4@gmail.cm', '$2y$10$ksbdMNj2nH2KCybl/Sy7L.XgfOaHMDorE9TXi9MACdgIetpvaRo6a', NULL, NULL, 2, 0, '2023-09-29 21:58:48', '2023-09-29 21:58:48', NULL),
-(15, 'test', '123', NULL, 'test@gmail.com', '123123', NULL, 'BCA', 1, 8, '2023-10-29 15:33:55', '2023-10-29 15:33:55', NULL),
-(16, 'testtings', '09812312', 'address', 'email@gmail.com', '12345678', NULL, 'BRI', 1, 8, '2023-10-29 15:35:24', '2023-10-29 15:35:24', NULL),
-(17, 'John Doe', '09183', 'addresss', 'johndoe@gmail.com', '$2y$10$qY7Kw6oITLOKwaReFPCY.OYKrXm.ugNSh7gZtPBiv27h6xRqZ/gga', NULL, 'BRI', 1, 8, '2023-10-29 15:36:51', '2023-10-29 15:36:51', NULL),
-(18, 'umkm', NULL, NULL, 'umkm@gmail.com', '$2y$10$AikS1UyuS5Pq70ovQAT9HeSWsLJYZqWRzl2kyDuiJmAr9MoBU3aFq', NULL, NULL, 2, 0, '2023-11-10 13:41:21', '2023-11-10 13:41:21', NULL),
-(19, 'konsumen', NULL, NULL, 'konsumen@gmail.com', '$2y$10$6zmHZyjMARNRysa7uEHKheVVnd8t045cGa4gCN99PAGZso2GGJo3K', NULL, NULL, 3, 0, '2023-11-10 14:45:09', '2023-11-10 14:45:09', NULL);
+INSERT INTO `users` (`id`, `name`, `phone`, `address`, `email`, `password`, `rekening`, `bank`, `role_id`, `user_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'Gerabah Mbah Karyo', '0111111', 'Jalan maju', 'mbahkaryo@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 2, 8, NULL, NULL, '2023-11-22 07:08:31', NULL),
+(3, 'Ahmad Hizbullah Akbar', NULL, NULL, 'ahmadhiz2000@gmail.com', '$2y$10$pff8lNPEq0rguxPm/gPN3O65RKuuSMctvguHcOqohrFGlOX.qPrsa', NULL, NULL, 3, 0, '0ineloJhbtFI1Jv4OzKDEXgIUnKl8W2w4J5A1RtwibsMTBas5KfVqDM35uC8', NULL, '2023-11-22 07:30:56', NULL),
+(4, 'distributor1', NULL, NULL, 'distributor1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-09-22 22:15:37', '2023-11-18 04:12:58', '2023-11-18 04:12:58'),
+(8, 'admin', '895613694343', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 'admin@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', '123123', 'BCA', 1, 0, NULL, '2023-09-23 01:29:51', '2023-11-22 07:18:58', NULL),
+(9, 'konsumen1', NULL, NULL, 'konsumen1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 3, 0, NULL, '2023-09-29 21:39:42', '2023-09-29 21:39:42', NULL),
+(10, 'suplier1', NULL, NULL, 'suplier1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:44:12', '2023-09-29 21:44:12', NULL),
+(11, 'suplier2', NULL, NULL, 'suplier2@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:45:55', '2023-11-18 04:14:26', '2023-11-18 04:14:26'),
+(12, 'suplier3', NULL, NULL, 'suplier3@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:49:27', '2023-11-18 04:14:33', '2023-11-18 04:14:33'),
+(13, 'distributor2', NULL, NULL, 'distributor2@gmail.cm', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-09-29 21:58:48', '2023-09-29 21:58:48', NULL),
+(14, 'distributor4', NULL, NULL, 'distributor4@gmail.cm', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-09-29 21:58:48', '2023-09-29 21:58:48', NULL),
+(15, 'test', '123', NULL, 'test@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 1, 8, NULL, '2023-10-29 15:33:55', '2023-10-29 15:33:55', NULL),
+(16, 'testtings', '09812312', 'address', 'email@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BRI', 1, 8, NULL, '2023-10-29 15:35:24', '2023-10-29 15:35:24', NULL),
+(17, 'John Doe', '09183', 'addresss', 'johndoe@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BRI', 1, 8, NULL, '2023-10-29 15:36:51', '2023-10-29 15:36:51', NULL),
+(18, 'umkm', '055555', NULL, 'umkm@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', '123123123', 'BNI', 2, 0, NULL, '2023-11-10 13:41:21', '2023-11-22 07:29:48', NULL),
+(19, 'konsumen', NULL, 'Jalan Cendrawasih 245', 'konsumen@gmail.com', 'eyJpdiI6IjJRTHc3TXBTMUFodU42M2xnMXpOQmc9PSIsInZhbHVlIjoickNRRlFyRWFYTVBhZ2lTckc3N2RNQT09IiwibWFjIjoiZmEzM2U0ZmUwODJmN2RhZjUzZDc3OGRjYWU3MTY0YTczMDBhNGRlOGU4N2I3OGQ1OTJmMjhiN2U3N2ZjNGI2ZCIsInRhZyI6IiJ9', 'asd', 'BRI', 3, 0, NULL, '2023-11-10 14:45:09', '2023-11-22 07:29:16', NULL),
+(20, 'John Doe', '088888', 'Jalan Cendrawasih 245', 'johndoe@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 1, 8, NULL, '2023-11-18 04:00:49', '2023-11-18 04:00:49', NULL),
+(21, 'test', NULL, NULL, 'testings@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 3, 0, NULL, '2023-11-19 02:03:06', '2023-11-19 02:03:06', NULL),
+(22, 'seller', '0890098', 'Jalan Cendrawasih 245', 'seller@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 2, 0, NULL, '2023-11-19 02:12:25', '2023-11-19 02:34:05', NULL),
+(23, 'admin2', NULL, NULL, 'admin2@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 1, 0, NULL, '2023-11-19 03:32:43', '2023-11-19 03:32:43', NULL),
+(24, 'admin', NULL, NULL, 'admin@admin.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 1, 0, NULL, '2023-11-21 05:45:31', '2023-11-21 05:45:31', NULL),
+(25, 'testcust', NULL, NULL, 'testcust@gmai.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-11-22 07:00:09', '2023-11-22 07:00:09', NULL);
 
 --
 -- Indexes for dumped tables
@@ -788,13 +799,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `catalogs`
 --
 ALTER TABLE `catalogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `catalog_categories`
 --
 ALTER TABLE `catalog_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `couriers`
@@ -812,7 +823,7 @@ ALTER TABLE `customer_orders`
 -- AUTO_INCREMENT for table `delivery_orders`
 --
 ALTER TABLE `delivery_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -824,7 +835,7 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT for table `material_categories`
 --
 ALTER TABLE `material_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -878,7 +889,7 @@ ALTER TABLE `purchase_payments`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sales_orders`
@@ -908,7 +919,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
