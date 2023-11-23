@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Helpers\SidebarHelper;
 
 use Illuminate\Http\Request;
@@ -303,8 +304,9 @@ class UserController extends Controller
         foreach($request->request as $key => $data){
             if($key == '_token')continue;
             $db_new->$key = $data;            
+            $db_new->password = Hash::make($request->password);     
         }
-            $db_new->user_id = $curr_user;       
+            $db_new->user_id = $curr_user;  
             
         if($db_new->save()){
             return back()->with('success', 'Selamat Data dimasukan!');
@@ -328,7 +330,9 @@ class UserController extends Controller
 
         foreach($request->request as $key => $data){
             if($key == '_token')continue;
-            $db_find->$key = $data;            
+            $db_find->$key = $data;
+            $db_new->password = Hash::make($data->password);     
+            
         }
             $db_find->user_id = $curr_user;
             
