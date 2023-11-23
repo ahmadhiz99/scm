@@ -330,11 +330,18 @@ class UserController extends Controller
 
         foreach($request->request as $key => $data){
             if($key == '_token')continue;
-            $db_find->$key = $data;
-            $db_new->password = Hash::make($data->password);     
-            
+            if($key == 'password'){
+                if($db_find->password != $data ){
+                    $db_find->password = Hash::make($request->password);     
+                }else{
+                    $db_find->$key = $data;
+                }
+            };
+
         }
-            $db_find->user_id = $curr_user;
+
+        $db_find->user_id = $curr_user;
+        // dd($db_find);
             
 
         if($db_find->save()){
