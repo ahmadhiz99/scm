@@ -302,7 +302,6 @@ class UserController extends Controller
 
         foreach($request->request as $key => $data){
             if($key == '_token')continue;
-            // dd($request);
             $db_new->$key = $data;            
         }
             $db_new->user_id = $curr_user;       
