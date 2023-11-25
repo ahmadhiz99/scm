@@ -141,77 +141,63 @@ class SupplierController extends Controller
                 ],
             ],
             'form-edit' => [
-                'purchase_order_id' => [
-                    'name' => 'purchase_order_id',
-                    'title' => 'purchase_order_id',
+                'supplier_name' => [
+                    'name' => 'supplier_name',
+                    'title' => 'supplier_name',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'purchase_order_id'
+                    'placeholder' => 'supplier_name'
                 ],
-                'payer_name' => [
-                    'name' => 'payer_name',
-                    'title' => 'payer_name',
+                'supplier_address' => [
+                    'name' => 'supplier_address',
+                    'title' => 'supplier_address',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'payer_name'
+                    'placeholder' => 'supplier_address'
                 ],
-                'nominal' => [
-                    'name' => 'nominal',
-                    'title' => 'nominal',
+                'supplier_phone' => [
+                    'name' => 'supplier_phone',
+                    'title' => 'supplier_phone',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'nominal'
+                    'placeholder' => 'supplier_phone'
                 ],
-                'payment_method' => [
-                    'name' => 'payment_method',
-                    'title' => 'payment_method',
+                'supplier_email' => [
+                    'name' => 'supplier_email',
+                    'title' => 'supplier_email',
                     'tag' => 'input',
-                    'type' => 'text',
-                    'placeholder' => 'payment_method'
-                ],
-                'payment_date' => [
-                    'name' => 'payment_date',
-                    'title' => 'payment_date',
-                    'tag' => 'date',
-                    'type' => 'date',
-                    'placeholder' => 'payment_date'
+                    'type' => 'email',
+                    'placeholder' => 'supplier_email'
                 ],
             ],
             'form-detail' => [
-                'purchase_order_id' => [
-                    'name' => 'purchase_order_id',
-                    'title' => 'purchase_order_id',
+                'supplier_name' => [
+                    'name' => 'supplier_name',
+                    'title' => 'supplier_name',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'purchase_order_id'
+                    'placeholder' => 'supplier_name'
                 ],
-                'payer_name' => [
-                    'name' => 'payer_name',
-                    'title' => 'payer_name',
+                'supplier_address' => [
+                    'name' => 'supplier_address',
+                    'title' => 'supplier_address',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'payer_name'
+                    'placeholder' => 'supplier_address'
                 ],
-                'nominal' => [
-                    'name' => 'nominal',
-                    'title' => 'nominal',
+                'supplier_phone' => [
+                    'name' => 'supplier_phone',
+                    'title' => 'supplier_phone',
                     'tag' => 'input',
                     'type' => 'text',
-                    'placeholder' => 'nominal'
+                    'placeholder' => 'supplier_phone'
                 ],
-                'payment_method' => [
-                    'name' => 'payment_method',
-                    'title' => 'payment_method',
+                'supplier_email' => [
+                    'name' => 'supplier_email',
+                    'title' => 'supplier_email',
                     'tag' => 'input',
-                    'type' => 'text',
-                    'placeholder' => 'payment_method'
-                ],
-                'payment_date' => [
-                    'name' => 'payment_date',
-                    'title' => 'payment_date',
-                    'tag' => 'date',
-                    'type' => 'date',
-                    'placeholder' => 'payment_date'
+                    'type' => 'email',
+                    'placeholder' => 'supplier_email'
                 ],
             ],
             
