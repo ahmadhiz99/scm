@@ -332,11 +332,11 @@ class UserController extends Controller
             if($key == '_token')continue;
             if($key == 'password'){
                 if($db_find->password != $data ){
-                    $db_find->password = Hash::make($request->password);     
-                }else{
-                    $db_find->$key = $data;
-                }
+                    $db_find->password = Hash::make($request->password);  
+                } 
+                continue;  
             };
+            $db_find->$key = $data;
 
         }
 
