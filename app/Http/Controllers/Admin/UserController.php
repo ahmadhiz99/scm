@@ -69,6 +69,7 @@ class UserController extends Controller
                 'password',
                 'id',
                 'user_id',
+                'remember_token',
                 'created_at',
                 'updated_at',
                 'deleted_at'
