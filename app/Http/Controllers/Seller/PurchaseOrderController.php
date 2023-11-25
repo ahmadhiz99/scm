@@ -35,8 +35,8 @@ class PurchaseOrderController extends Controller
         return PurchaseOrder::find($id);
     }
 
-    public function configDB_supplier_all(){
-        return Supplier::all();
+    public function configDB_supplier_all($id){
+        return Supplier::where('user_id','=',$id)->get();
     }
 
     public function configDB_sales_order(){
@@ -60,7 +60,8 @@ class PurchaseOrderController extends Controller
 
         $db_all = $this->configDB_all();
         $db_new = $this->configDB_new();
-        $db_all_supplier = $this->configDB_supplier_all();        
+        
+        $db_all_supplier = $this->configDB_supplier_all(Auth::user()->id);        
 
         // Inisiate Data
                 
@@ -257,14 +258,14 @@ class PurchaseOrderController extends Controller
                         ],
                     ],
                 ],
-                'supplier_id' => [
+                 'supplier_id' => [
                     'name' => 'supplier_id',
                     'title' => 'supplier_id',
                     'tag' => 'option',
                     'type' => 'option',
                     'placeholder' => 'supplier_id',
                     'option-config' => [
-                        'option-title' => 'courier_name',
+                        'option-title' => 'supplier_name',
                         'option-reference' => 'id',
                         'option-content' => $db_all_supplier,
                     ],
@@ -337,14 +338,14 @@ class PurchaseOrderController extends Controller
                         ],
                     ],
                 ],
-                'supplier_id' => [
+                 'supplier_id' => [
                     'name' => 'supplier_id',
                     'title' => 'supplier_id',
                     'tag' => 'option',
                     'type' => 'option',
                     'placeholder' => 'supplier_id',
                     'option-config' => [
-                        'option-title' => 'courier_name',
+                        'option-title' => 'supplier_name',
                         'option-reference' => 'id',
                         'option-content' => $db_all_supplier,
                     ],
