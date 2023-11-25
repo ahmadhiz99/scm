@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Suppy Chain App</a>
+            <a href="index.html">Supply Chain App</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">SCA</a>
