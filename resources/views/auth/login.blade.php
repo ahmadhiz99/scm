@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
- 
 
+<!-- <img class="" src="{{ asset('images/gerabah.jpg') }}" alt="Card image cap" style="z-index"> -->
 
-<div class="container">
+<div class="container"  >
     <div class="row justify-content-center">
         @if (session('failed'))
             <div class="alert alert-danger">
