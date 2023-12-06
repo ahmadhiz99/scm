@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2023 at 03:43 PM
+-- Generation Time: Dec 07, 2023 at 12:54 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -120,6 +120,7 @@ CREATE TABLE `customer_orders` (
   `note` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sales_order_id` bigint(20) UNSIGNED NOT NULL,
   `notif` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `status` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -129,16 +130,38 @@ CREATE TABLE `customer_orders` (
 -- Dumping data for table `customer_orders`
 --
 
-INSERT INTO `customer_orders` (`id`, `user_id`, `catalog_id`, `quantity`, `price`, `note`, `sales_order_id`, `notif`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 8, 5, 6, 12000, '12000', 1, '0', '2023-10-31 11:27:55', '2023-11-01 06:05:35', NULL),
-(6, 8, 4, 194, 12000, '12000', 1, '0', '2023-10-31 11:46:56', '2023-11-10 16:24:46', NULL),
-(7, 8, 6, 2, 12000, '12000', 1, '0', '2023-10-31 11:53:42', '2023-11-01 05:58:44', NULL),
-(8, 8, 7, 3, 12000, '12000', 1, '0', '2023-11-07 01:13:12', '2023-11-07 01:13:41', NULL),
-(9, 8, 8, 4, 12000, '12000', 1, '0', '2023-11-07 01:14:37', '2023-11-07 01:14:48', NULL),
-(10, 19, 4, 177, 12000, '12000', 1, '1', '2023-11-10 16:32:21', '2023-11-10 17:29:08', NULL),
-(11, 19, 5, 26, 12000, '12000', 1, '1', '2023-11-10 16:41:01', '2023-11-10 17:37:41', NULL),
-(12, 19, 6, 1, 12000, '12000', 1, '1', '2023-11-10 16:45:20', '2023-11-10 16:45:20', NULL),
-(13, 19, 7, 178, 12000, '12000', 1, '1', '2023-11-10 16:45:55', '2023-11-10 17:24:02', NULL);
+INSERT INTO `customer_orders` (`id`, `user_id`, `catalog_id`, `quantity`, `price`, `note`, `sales_order_id`, `notif`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 8, 5, 6, 12000, '12000', 1, '0', 0, '2023-10-31 11:27:55', '2023-11-01 06:05:35', NULL),
+(6, 8, 4, 194, 12000, '12000', 1, '0', 0, '2023-10-31 11:46:56', '2023-11-10 16:24:46', NULL),
+(7, 8, 6, 2, 12000, '12000', 1, '0', 0, '2023-10-31 11:53:42', '2023-11-01 05:58:44', NULL),
+(8, 8, 7, 3, 12000, '12000', 1, '0', 0, '2023-11-07 01:13:12', '2023-11-07 01:13:41', NULL),
+(9, 8, 8, 4, 12000, '12000', 1, '0', 0, '2023-11-07 01:14:37', '2023-11-07 01:14:48', NULL),
+(10, 19, 4, 177, 12000, '12000', 1, '1', 0, '2023-11-10 16:32:21', '2023-11-10 17:29:08', NULL),
+(11, 19, 5, 26, 12000, '12000', 1, '1', 0, '2023-11-10 16:41:01', '2023-11-10 17:37:41', NULL),
+(12, 19, 6, 5, 12000, '12000', 1, '1', 0, '2023-11-10 16:45:20', '2023-12-06 14:36:20', NULL),
+(13, 19, 7, 178, 12000, '12000', 1, '0', 0, '2023-11-10 16:45:55', '2023-11-24 17:40:08', NULL),
+(19, 19, 4, 1, 12000, NULL, 0, '1', 0, '2023-12-06 12:23:41', '2023-12-06 12:23:41', NULL),
+(20, 19, 4, 1, 12000, NULL, 1, '1', 0, '2023-12-06 12:26:08', '2023-12-06 12:26:08', NULL),
+(21, 19, 4, 1, 12000, NULL, 1, '1', 0, '2023-12-06 12:26:19', '2023-12-06 12:26:19', NULL),
+(22, 19, 4, 1, 12000, NULL, 1, '1', 0, '2023-12-06 12:26:21', '2023-12-06 12:26:21', NULL),
+(23, 19, 4, 1, 12000, NULL, 1, '0', 0, '2023-12-06 12:26:47', '2023-12-06 12:57:14', NULL),
+(24, 19, 4, 1, 12000, NULL, 1, '0', 0, '2023-12-06 12:27:59', '2023-12-06 12:46:13', NULL),
+(25, 19, 4, 1, 12000, NULL, 0, '1', 1, '2023-12-06 12:28:47', '2023-12-06 12:28:47', NULL),
+(26, 19, 4, 1, 12000, NULL, 0, '1', 1, '2023-12-06 12:42:23', '2023-12-06 12:42:23', NULL),
+(27, 19, 4, 1, 12000, NULL, 0, '1', 1, '2023-12-06 12:44:06', '2023-12-06 12:44:06', NULL),
+(28, 19, 7, 1, 90000, NULL, 0, '1', 1, '2023-12-06 12:46:43', '2023-12-06 12:46:43', NULL),
+(29, 19, 4, 1, 12000, NULL, 0, '1', 1, '2023-12-06 12:58:11', '2023-12-06 12:58:11', NULL),
+(30, 19, 9, 14, 15000, NULL, 0, '0', 0, '2023-12-06 14:34:39', '2023-12-06 14:39:56', NULL),
+(31, 19, 8, 2, 13000, NULL, 0, '0', 0, '2023-12-06 14:37:21', '2023-12-06 14:39:48', NULL),
+(32, 19, 8, 2, 13000, NULL, 0, '1', 1, '2023-12-06 15:55:51', '2023-12-06 15:55:51', NULL),
+(33, 19, 8, 2, 13000, NULL, 0, '1', 1, '2023-12-06 15:57:38', '2023-12-06 15:57:38', NULL),
+(34, 19, 9, 14, 15000, NULL, 0, '1', 1, '2023-12-06 16:11:10', '2023-12-06 16:11:10', NULL),
+(35, 19, 9, 14, 15000, NULL, 0, '1', 1, '2023-12-06 16:12:10', '2023-12-06 16:12:10', NULL),
+(36, 19, 9, 14, 15000, NULL, 0, '1', 1, '2023-12-06 16:14:31', '2023-12-06 16:14:31', NULL),
+(37, 19, 9, 14, 15000, NULL, 0, '1', 1, '2023-12-06 16:16:17', '2023-12-06 16:16:17', NULL),
+(38, 19, 8, 2, 13000, NULL, 38, '1', 1, '2023-12-06 16:43:48', '2023-12-06 16:43:48', NULL),
+(39, 19, 8, 2, 13000, NULL, 19, '1', 1, '2023-12-06 16:48:43', '2023-12-06 16:48:43', NULL),
+(40, 19, 8, 11, 13000, NULL, 20, '1', 3, '2023-12-06 16:49:42', '2023-12-06 16:49:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -368,7 +391,8 @@ INSERT INTO `production_orders` (`id`, `no_production`, `start_date`, `end_date`
 (4, 'Test4', '2023-10-26', '2023-10-31', 300, 'Bundling 1', NULL, '1', 8, '2023-10-25 10:40:27', '2023-10-25 10:40:27', NULL),
 (5, 'Test 7', '2023-10-26', '2023-11-11', 340, 'Testing 7', NULL, '2', 8, '2023-10-25 12:30:09', '2023-10-25 13:25:54', NULL),
 (6, 'Test10', '2023-10-01', '2023-10-31', 800, 'Testing 10', NULL, '1', 8, '2023-10-25 12:33:24', '2023-10-25 12:33:24', NULL),
-(7, '911', '2023-11-13', '2023-11-15', 12, 'test11', NULL, '1', 8, '2023-11-13 04:10:19', '2023-11-13 04:10:19', NULL);
+(7, '911', '2023-11-13', '2023-11-15', 12, 'test11', NULL, '1', 8, '2023-11-13 04:10:19', '2023-11-13 04:10:19', NULL),
+(8, 'tesss', '2023-11-19', '2023-11-24', 120, 'requester12', NULL, '2', 18, '2023-11-24 17:09:20', '2023-11-24 17:09:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -416,7 +440,8 @@ CREATE TABLE `purchase_orders` (
 --
 
 INSERT INTO `purchase_orders` (`id`, `no_purchase_invoice`, `purchase_date`, `receive_date`, `requester_name`, `grand_total`, `payment_total`, `status`, `supplier_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '01234', '2023-10-01', '2023-10-05', 'requester1', 10000, 10000, '1', 1, 8, '2023-10-27 10:16:42', '2023-10-27 10:20:38', NULL);
+(3, '01234', '2023-10-01', '2023-10-05', 'requester1', 10000, 10000, '1', 1, 8, '2023-10-27 10:16:42', '2023-10-27 10:20:38', NULL),
+(4, '0123', '2023-11-25', '2023-11-26', 'requester1', 10000, 10000, '1', 2, 18, '2023-11-24 17:24:03', '2023-11-24 17:24:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -489,6 +514,7 @@ CREATE TABLE `sales_orders` (
   `courier_id` bigint(20) UNSIGNED DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -498,15 +524,25 @@ CREATE TABLE `sales_orders` (
 -- Dumping data for table `sales_orders`
 --
 
-INSERT INTO `sales_orders` (`id`, `no_sale_invoice`, `invoice_date`, `due_date`, `customer_name`, `shipping_address`, `grand_total`, `courier_id`, `status`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '123-invoice', '2023-10-01', '2023-10-04', 'customer1', 'addres1', 123000, 1, '1', 8, '2023-10-26 06:40:58', '2023-10-26 06:41:11', NULL),
-(4, 'inv-8-1699353842', '2023-11-07', NULL, 'akbar', 'Kulon Progo', 13000, NULL, '0', 8, '2023-11-07 03:44:02', '2023-11-07 03:44:02', NULL),
-(5, 'inv-4-1699656429', '2023-11-10', NULL, 'test', 'test', 12000, NULL, '0', 19, '2023-11-10 15:47:09', '2023-11-10 15:47:09', NULL),
-(6, 'inv-4-1699656721', '2023-11-10', NULL, 'testak', 'jalan asdasd', 12000, NULL, '0', 19, '2023-11-10 15:52:01', '2023-11-10 15:52:01', NULL),
-(7, 'inv-5-1699664344', '2023-11-11', NULL, 'konsumns', '123', 55000, NULL, '0', 19, '2023-11-10 17:59:04', '2023-11-10 17:59:04', NULL),
-(8, 'inv-5-1699871940', '2023-11-13', NULL, 'test', 'Jalan Cendrawasih 245', 55000, NULL, '0', 19, '2023-11-13 03:39:00', '2023-11-13 03:39:00', NULL),
-(9, 'inv-5-1699872724', '2023-11-13', NULL, 'test', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 55000, NULL, '0', 19, '2023-11-13 03:52:04', '2023-11-13 03:52:04', NULL),
-(10, 'inv-5-1699872764', '2023-11-13', NULL, 'test', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 55000, NULL, '0', 19, '2023-11-13 03:52:44', '2023-11-13 03:52:44', NULL);
+INSERT INTO `sales_orders` (`id`, `no_sale_invoice`, `invoice_date`, `due_date`, `customer_name`, `shipping_address`, `grand_total`, `courier_id`, `status`, `user_id`, `customer_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '123-invoice', '2023-10-01', '2023-10-04', 'customer1', 'addres1', 123000, 1, '1', 8, 0, '2023-10-26 06:40:58', '2023-10-26 06:41:11', NULL),
+(4, 'inv-8-1699353842', '2023-11-07', NULL, 'akbar', 'Kulon Progo', 13000, NULL, '0', 8, 0, '2023-11-07 03:44:02', '2023-11-07 03:44:02', NULL),
+(5, 'inv-4-1699656429', '2023-11-10', NULL, 'test', 'test', 12000, NULL, '0', 19, 0, '2023-11-10 15:47:09', '2023-11-10 15:47:09', NULL),
+(6, 'inv-4-1699656721', '2023-11-10', NULL, 'testak', 'jalan asdasd', 12000, NULL, '0', 19, 0, '2023-11-10 15:52:01', '2023-11-10 15:52:01', NULL),
+(7, 'inv-5-1699664344', '2023-11-11', NULL, 'konsumns', '123', 55000, NULL, '0', 19, 0, '2023-11-10 17:59:04', '2023-11-10 17:59:04', NULL),
+(8, 'inv-5-1699871940', '2023-11-13', NULL, 'test', 'Jalan Cendrawasih 245', 55000, NULL, '0', 19, 0, '2023-11-13 03:39:00', '2023-11-13 03:39:00', NULL),
+(9, 'inv-5-1699872724', '2023-11-13', NULL, 'test', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 55000, NULL, '0', 19, 0, '2023-11-13 03:52:04', '2023-11-13 03:52:04', NULL),
+(10, 'inv-5-1699872764', '2023-11-13', NULL, 'test', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 55000, NULL, '0', 19, 0, '2023-11-13 03:52:44', '2023-11-13 03:52:44', NULL),
+(11, 'inv-4-1700872768', '2023-11-25', NULL, 'TestJohndoe', 'Jalan Cendrawasih 245', 12000, NULL, '0', 19, 0, '2023-11-24 17:39:28', '2023-11-24 17:39:28', NULL),
+(12, 'inv-7-1700872831', '2023-11-25', NULL, 'test', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 16020000, NULL, '0', 19, 0, '2023-11-24 17:40:31', '2023-11-24 17:40:31', NULL),
+(13, 'inv-7-1700873018', '2023-11-25', NULL, 'test', 'Jalan LALA', 16020000, NULL, '0', 19, 0, '2023-11-24 17:43:38', '2023-11-24 17:43:38', NULL),
+(14, 'inv-19-8-1701903458', '2023-12-06', NULL, 'Rafi', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 26000, NULL, '0', 19, 0, '2023-12-06 15:57:38', '2023-12-06 15:57:38', NULL),
+(15, 'inv-19-9-1701904330', '2023-12-06', NULL, 'Jhon', 'Jalan Cendrawasih 24567', 210000, NULL, '1', 19, 19, '2023-12-06 16:12:10', '2023-12-06 16:12:10', NULL),
+(16, 'inv-19-9-1701904471', '2023-12-06', NULL, 'Jhon', 'Jalan Cendrawasih 24567', 210000, NULL, '1', 19, 19, '2023-12-06 16:14:31', '2023-12-06 16:14:31', NULL),
+(17, 'inv-19-9-1701904577', '2023-12-06', '2023-12-08', 'Jhon', 'Jalan Cendrawasih 24567', 210000, 1, '0', 8, 19, '2023-12-06 16:16:17', '2023-12-06 16:24:45', NULL),
+(18, 'inv-19-8-1701906228', '2023-12-06', NULL, 'lalal', 'Jalan Cendrawasih 24567', 26000, NULL, '0', 8, 19, '2023-12-06 16:43:48', '2023-12-06 16:43:48', NULL),
+(19, 'inv-19-8-1701906523', '2023-12-06', NULL, 'lalal', 'Jalan Cendrawasih 24567', 26000, NULL, '0', 8, 19, '2023-12-06 16:48:43', '2023-12-06 16:48:43', NULL),
+(20, 'inv-19-8-1701906582', '2023-12-06', '2023-12-07', 'papap', 'Jalan maju asd', 143000, 1, '2', 8, 19, '2023-12-06 16:49:42', '2023-12-06 16:52:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +586,8 @@ CREATE TABLE `sales_payments` (
 --
 
 INSERT INTO `sales_payments` (`id`, `sales_order_id`, `payer_name`, `nominal`, `payment_date`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 'payer1', 10000, '2023-10-07', '2', 8, '2023-10-27 11:44:29', '2023-10-29 14:13:14');
+(1, 1, 'payer1', 10000, '2023-10-07', '2', 8, '2023-10-27 11:44:29', '2023-10-29 14:13:14'),
+(2, 17, 'jhon', 12000, '2023-12-07', '1', 8, '2023-12-06 16:22:30', '2023-12-06 16:22:30');
 
 -- --------------------------------------------------------
 
@@ -575,7 +612,8 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `supplier_name`, `supplier_address`, `supplier_phone`, `supplier_email`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Vivid Suppier', 'banguntappan', '0120831023', 'vivi@gmail.com', 8, '2023-10-27 10:13:12', '2023-10-27 10:13:12', NULL);
+(1, 'Vivid Suppier', 'banguntappan', '0120831023', 'vivi@gmail.com', 8, '2023-10-27 10:13:12', '2023-10-27 10:13:12', NULL),
+(2, 'test supplier 1', 'banguntappans', '01208310232', 'suppliersOne@gmail.com', 18, '2023-11-24 17:22:45', '2023-11-24 17:33:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -605,11 +643,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `address`, `email`, `password`, `rekening`, `bank`, `role_id`, `user_id`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Gerabah Mbah Karyo', '0111111', 'Jalan maju', 'mbahkaryo@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 2, 8, NULL, NULL, '2023-11-22 07:08:31', NULL),
-(3, 'Ahmad Hizbullah Akbar', NULL, NULL, 'ahmadhiz2000@gmail.com', '$2y$10$pff8lNPEq0rguxPm/gPN3O65RKuuSMctvguHcOqohrFGlOX.qPrsa', NULL, NULL, 3, 0, '0ineloJhbtFI1Jv4OzKDEXgIUnKl8W2w4J5A1RtwibsMTBas5KfVqDM35uC8', NULL, '2023-11-22 07:30:56', NULL),
+(2, 'Gerabah Mbah Karyo', '011111122', 'Jalan maju asd', 'mbahkaryo@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 1, 8, NULL, NULL, '2023-11-24 17:16:16', NULL),
+(3, 'Ahmad Hizbullah Akbar', NULL, NULL, 'ahmadhiz2000@gmail.com', '$2y$10$pff8lNPEq0rguxPm/gPN3O65RKuuSMctvguHcOqohrFGlOX.qPrsa', NULL, NULL, 3, 0, '3KiCVzsdXwgnIQAwMGO9mS7beKIb1AVrxWml3i7BJyPBxy2E9BDYfyQI8Y2a', NULL, '2023-11-22 07:30:56', NULL),
 (4, 'distributor1', NULL, NULL, 'distributor1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-09-22 22:15:37', '2023-11-18 04:12:58', '2023-11-18 04:12:58'),
-(8, 'admin', '895613694343', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 'admin@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', '123123', 'BCA', 1, 0, NULL, '2023-09-23 01:29:51', '2023-11-22 07:18:58', NULL),
-(9, 'konsumen1', NULL, NULL, 'konsumen1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 3, 0, NULL, '2023-09-29 21:39:42', '2023-09-29 21:39:42', NULL),
+(8, 'admin', '895613694343', 'Jl. Gunda Wijaya, RT. 05 / RW. 03, Banjarejo, Kec. Blora, Kabupaten Blora, Jawa Tengah 58253', 'admin@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', '123123', 'BCA', 2, 0, NULL, '2023-09-23 01:29:51', '2023-11-22 07:18:58', NULL),
+(9, 'konsumen1', '0895613694342', 'Jalan Cendrawasih 245', 'konsumen1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BRI', 2, 8, NULL, '2023-09-29 21:39:42', '2023-11-24 17:17:18', NULL),
 (10, 'suplier1', NULL, NULL, 'suplier1@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:44:12', '2023-09-29 21:44:12', NULL),
 (11, 'suplier2', NULL, NULL, 'suplier2@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:45:55', '2023-11-18 04:14:26', '2023-11-18 04:14:26'),
 (12, 'suplier3', NULL, NULL, 'suplier3@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 4, 0, NULL, '2023-09-29 21:49:27', '2023-11-18 04:14:33', '2023-11-18 04:14:33'),
@@ -619,13 +657,15 @@ INSERT INTO `users` (`id`, `name`, `phone`, `address`, `email`, `password`, `rek
 (16, 'testtings', '09812312', 'address', 'email@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BRI', 1, 8, NULL, '2023-10-29 15:35:24', '2023-10-29 15:35:24', NULL),
 (17, 'John Doe', '09183', 'addresss', 'johndoe@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BRI', 1, 8, NULL, '2023-10-29 15:36:51', '2023-10-29 15:36:51', NULL),
 (18, 'umkm', '055555', NULL, 'umkm@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', '123123123', 'BNI', 2, 0, NULL, '2023-11-10 13:41:21', '2023-11-22 07:29:48', NULL),
-(19, 'konsumen', NULL, 'Jalan Cendrawasih 245', 'konsumen@gmail.com', 'eyJpdiI6IjJRTHc3TXBTMUFodU42M2xnMXpOQmc9PSIsInZhbHVlIjoickNRRlFyRWFYTVBhZ2lTckc3N2RNQT09IiwibWFjIjoiZmEzM2U0ZmUwODJmN2RhZjUzZDc3OGRjYWU3MTY0YTczMDBhNGRlOGU4N2I3OGQ1OTJmMjhiN2U3N2ZjNGI2ZCIsInRhZyI6IiJ9', 'asd', 'BRI', 3, 0, NULL, '2023-11-10 14:45:09', '2023-11-22 07:29:16', NULL),
+(19, 'konsumen', '0888888', 'Jalan Cendrawasih 245', 'konsumen@gmail.com', '$2y$10$HLi09.EAf0J7ZyAZ8pqHj.TF4An6zJ1nMUMWYHe1W9DNQGUm3yq8q', 'asd', 'BRI', 3, 8, NULL, '2023-11-10 14:45:09', '2023-11-24 17:38:41', NULL),
 (20, 'John Doe', '088888', 'Jalan Cendrawasih 245', 'johndoe@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 1, 8, NULL, '2023-11-18 04:00:49', '2023-11-18 04:00:49', NULL),
 (21, 'test', NULL, NULL, 'testings@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 3, 0, NULL, '2023-11-19 02:03:06', '2023-11-19 02:03:06', NULL),
 (22, 'seller', '0890098', 'Jalan Cendrawasih 245', 'seller@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, 'BCA', 2, 0, NULL, '2023-11-19 02:12:25', '2023-11-19 02:34:05', NULL),
 (23, 'admin2', NULL, NULL, 'admin2@gmail.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 1, 0, NULL, '2023-11-19 03:32:43', '2023-11-19 03:32:43', NULL),
 (24, 'admin', NULL, NULL, 'admin@admin.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 1, 0, NULL, '2023-11-21 05:45:31', '2023-11-21 05:45:31', NULL),
-(25, 'testcust', NULL, NULL, 'testcust@gmai.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-11-22 07:00:09', '2023-11-22 07:00:09', NULL);
+(25, 'testcust', NULL, NULL, 'testcust@gmai.com', '$2y$10$Q8jmDAeDrDypa8iyTivQZO.eGbldpBKzmTakHOghD6hjGzi2aZWzG', NULL, NULL, 2, 0, NULL, '2023-11-22 07:00:09', '2023-11-22 07:00:09', NULL),
+(26, 'test', '08787', 'Jalan Cendrawasih 245', 'umkm3@gmail.com', '$2y$10$wmMvdbJcuC5tkJiOFFSVm.P/eAo3rxdcmxK4vRlc6X3vIayQ9fJ46', NULL, 'BNI', 2, 8, NULL, '2023-11-22 23:01:30', '2023-11-22 23:15:13', NULL),
+(27, 'test123', NULL, NULL, 'test123@gmail.com', '$2y$10$5u1uSh5kKpV5uTD/.Q//lOR19LqIdwGIrOixl.UvPMS4KQGcv4z5K', NULL, NULL, 3, 0, NULL, '2023-11-27 08:41:04', '2023-11-27 08:41:04', NULL);
 
 --
 -- Indexes for dumped tables
@@ -817,7 +857,7 @@ ALTER TABLE `couriers`
 -- AUTO_INCREMENT for table `customer_orders`
 --
 ALTER TABLE `customer_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `delivery_orders`
@@ -865,7 +905,7 @@ ALTER TABLE `production_item_materials`
 -- AUTO_INCREMENT for table `production_orders`
 --
 ALTER TABLE `production_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `purchase_materials`
@@ -877,7 +917,7 @@ ALTER TABLE `purchase_materials`
 -- AUTO_INCREMENT for table `purchase_orders`
 --
 ALTER TABLE `purchase_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `purchase_payments`
@@ -895,7 +935,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales_orders`
 --
 ALTER TABLE `sales_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `sales_order_payments`
@@ -907,19 +947,19 @@ ALTER TABLE `sales_order_payments`
 -- AUTO_INCREMENT for table `sales_payments`
 --
 ALTER TABLE `sales_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
@@ -937,7 +977,6 @@ ALTER TABLE `catalogs`
 --
 ALTER TABLE `customer_orders`
   ADD CONSTRAINT `customer_orders_catalog_id_foreign` FOREIGN KEY (`catalog_id`) REFERENCES `catalogs` (`id`),
-  ADD CONSTRAINT `customer_orders_sales_order_id_foreign` FOREIGN KEY (`sales_order_id`) REFERENCES `sales_orders` (`id`),
   ADD CONSTRAINT `customer_orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --

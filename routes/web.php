@@ -161,7 +161,7 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     
     Route::get('dashboard',[KonsumenController::class,'index'])->name('konsumen.dashboard');
     Route::get('detail/{id}',[KonsumenController::class,'detail'])->name('konsumen.detail');
-    Route::get('detail/{id}/cart/{count}',[KonsumenController::class,'cart'])->name('konsumen.cart');
+    Route::post('detail/{id}/cart',[KonsumenController::class,'cart'])->name('konsumen.cart');
     Route::get('detail/detail-order/{id}',[KonsumenController::class,'detail_order'])->name('konsumen.detail-order');
     Route::get('detail/{id}/payment/{count}',[KonsumenController::class,'payment'])->name('konsumen.payment');
     Route::get('detail/{id}/finish-payment',[KonsumenController::class,'finish_payment'])->name('konsumen.finish-payment');
@@ -170,6 +170,9 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     Route::post('edit-profile',[KonsumenController::class,'editProfile']);
 
     Route::post('search',[KonsumenController::class,'search'])->name('search');
+    Route::get('order',[KonsumenController::class,'order'])->name('order');
+    Route::get('detail-order/{id}',[KonsumenController::class,'detail'])->name('order.detail');
+
 
 
 });

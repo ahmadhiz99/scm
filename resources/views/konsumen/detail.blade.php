@@ -39,9 +39,12 @@
         {{ session('status') }}
     </div>
 @endif -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 
           <div class="section-body">
-            <h2 class="section-title">Catalog</h2>
+            <h2 class="section-title">Detail</h2>
             <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->
             <div class="card">
               <!-- <div class="card-header">
@@ -147,23 +150,41 @@
                               });
 
 
+                              $(document).on('click','.cart',function(){
+                                var count = $('.count').val();
+
+                                // window.location = "/konsumen/detail/" + <#?php echo $data->id ?> + "/cart/"+count;
+
+                                //   $.ajax({
+                                //       type: "GET",
+                                //       url: "/konsumen/detail/{{$data->id}}/cart/".count,
+                                //       data: {countertje: count},
+                                //       success:function(data){
+                                //           $('#main').html(data);
+                                //           console.log(count);
+                                //       }
+
+                                //   });
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                
+                                $.ajax({
+                                  method: 'POST',
+                                  url: '{{$data->id}}/cart',
+                                  data: {
+                                    id:'{{$data->id}}',
+                                    count:count,
+                                   
+                                  }
+                                  
+                              }).done(function () {
+                                alert('Data Berhasil Dimasukan Ke Keranjang')
+                              });
+                              })
                               $(document).ready(function(){
-                                  $(document).on('click','.cart',function(){
-                                    var count = $('.count').val();
-
-                                    window.location = "/konsumen/detail/" + <?php echo $data->id ?> + "/cart/"+count;
-
-                                      $.ajax({
-                                          type: "GET",
-                                          url: "/konsumen/detail/{{$data->id}}/cart/".count,
-                                          data: {countertje: count},
-                                          success:function(data){
-                                              $('#main').html(data);
-                                              console.log(count);
-                                          }
-
-                                      });
-                                  })
 
                               });
 

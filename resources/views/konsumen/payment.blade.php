@@ -53,7 +53,9 @@
 
                     <form class="m-4" action="/konsumen/detail/{{$data->id}}/finish-payment">
                       <div class="form-row">
-                      
+
+                      <input hidden required type="text" name="catalog_id" class="form-control" id="unitPrice" value="{{$data->catalog_id}}">
+
                        <div class="form-group col-md-4">
                           <label for="unitPrice">Unit Price</label>
                           <input readonly required type="text" name="unitPrice" class="form-control" id="unitPrice" value="{{$data->unit_price}}">

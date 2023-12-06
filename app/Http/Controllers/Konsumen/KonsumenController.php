@@ -35,6 +35,7 @@ class KonsumenController extends Controller
             ->select('customer_orders.id as id_customer_order','customer_orders.*','catalogs.*')
             ->join('catalogs', 'customer_orders.catalog_id', '=', 'catalogs.id')
             ->where('customer_orders.user_id', Auth::user()->id)
+            ->where('customer_orders.status','=','0')
             ->orderBy('customer_orders.id','desc')
             ->get();
             $beep = false;
@@ -109,24 +110,17 @@ class KonsumenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function cart($id, $count)
+    public function cart(Request $request, $id)
     {
-        // dd();
-
+        // dd($request->count);
         $curr_user = Auth::user()->id;
         $menu = SidebarHelper::list(Auth::user()->role_id);
-
-        // dd($curr_user);
-        
         $data = Catalog::find($id);
-        
         $cust_find_duplicate = CustomerOrder::where('catalog_id','=',$id)->where('user_id','=',$curr_user)->first();
-
-        
+       
         if($cust_find_duplicate !=null){
-            $cust_find_duplicate->quantity += $count;
+            $cust_find_duplicate->quantity = $request->count;
             if($cust_find_duplicate->save()){
-                // dd($cust_find_duplicate);
                 $menu = SidebarHelper::list(Auth::user()->role_id);
                 $data = Catalog::find($id);
                 // session()->flash('status', 'This is a message!'); 
@@ -138,10 +132,7 @@ class KonsumenController extends Controller
                 //         'data'=>$data
                 //     ]
                 // );
-
                 return back()->with('status', 'Maaf Data Duplicates!');
-
-               
             }else{
                 return back()->with('status', 'Maaf Data Duplicates!');
             }
@@ -149,10 +140,12 @@ class KonsumenController extends Controller
             $cust_order = new CustomerOrder;
             $cust_order->user_id = $curr_user;
             $cust_order->catalog_id = $id;
-            $cust_order->quantity = $count;
-            $cust_order->price = 12000;
-            $cust_order->note = 12000;
-            $cust_order->sales_order_id = 1;
+            $cust_order->quantity = $request->count;
+            $cust_order->price = $data->unit_price;
+            $cust_order->note = $request->note;
+            $cust_order->sales_order_id = 0;
+            
+            // $cust_order->sales_order_id = 1;
             if($cust_order->save()){
                 return back()->with('status', 'Selamat Data dimasukan!');
             }else{
@@ -169,19 +162,19 @@ class KonsumenController extends Controller
      */
     public function payment($id, $count)
     {
-        // dd($count);
         $menu = SidebarHelper::list(Auth::user()->role_id);
         $dataCatalog = Catalog::find($id);
 
         $curr_user = Auth::user()->id;
         $user = User::find($curr_user);
-
+        
         $data = DB::table('customer_orders')
-            ->select('customer_orders.id as id_customer_order','customer_orders.*','catalogs.*')
-            ->join('catalogs', 'customer_orders.catalog_id', '=', 'catalogs.id')
-            ->where('catalogs.id', $id)
-            ->orderBy('customer_orders.id','desc')
-            ->get();
+        ->select('customer_orders.id as id_customer_order','customer_orders.*','catalogs.*')
+        ->join('catalogs', 'customer_orders.catalog_id', '=', 'catalogs.id')
+        ->where('catalogs.id', $id)
+        ->orderBy('customer_orders.id','desc')
+        ->get();
+        // dd($data);
 
         return view(
             'konsumen.payment',
@@ -252,27 +245,73 @@ class KonsumenController extends Controller
         $salesPayment = new SalesPayment;
         $curdate = Carbon\Carbon::now();
         $catalog = Catalog::find($id);
+
         $umkm = DB::table('catalogs')
-            ->select('catalogs.id as id_customer_order','catalogs.*','users.*')
+            ->select('catalogs.id as id_customer_order','catalogs.user_id as id_umkm','catalogs.*','users.*')
             ->join('users', 'catalogs.user_id', '=', 'users.id')
             ->where('catalogs.id', $id)
             ->get();
 
         // dd($umkm[0]);
 
-        $salesOrder = new SalesOrder;
-        $salesOrder->no_sale_invoice = 'inv-'.$id.'-'.$curdate->toArray()['timestamp'];
-        $salesOrder->invoice_date = $curdate->toArray()['formatted'];
-        $salesOrder->customer_name = $request->customerName;
-        $salesOrder->shipping_address = $request->address;
-        $salesOrder->grand_total = $request->total;
-        // $salesOrder->courier_id = 0;
-        $salesOrder->status = 0;
-        $curr_user = Auth::user()->id;
-        $salesOrder->user_id = $curr_user;
-        // $sales_order_id = $salesOrder->id;
+        // $salesOrder = new SalesOrder;
+        // $salesOrder->no_sale_invoice = 'inv-'.$id.'-'.$curdate->toArray()['timestamp'];
+        // $salesOrder->invoice_date = $curdate->toArray()['formatted'];
+        // $salesOrder->customer_name = $request->customerName;
+        // $salesOrder->shipping_address = $request->address;
+        // $salesOrder->quantity = $request->total;
+        // // $salesOrder->courier_id = 0;
+        // $salesOrder->status = 0;
+        // $curr_user = Auth::user()->id;
+        // $salesOrder->user_id = $curr_user;
+        // // $sales_order_id = $salesOrder->id;
 
-        if($salesOrder->save()){
+        $curr_user = Auth::user()->id;
+
+        if($request->id == 1){
+            $customerOrder = CustomerOrder::find($request->id);
+            $customerOrder->catalog_id = $request->catalog_id;
+            // $customerOrder->shipping_address = $request->address;
+            // $customerOrder->grand_total = $request->total;
+            $customerOrder->price = $request->unitPrice;
+            $customerOrder->quantity = $request->quantity;
+            $customerOrder->sales_order_id = 0; 
+            $customerOrder->status = 1; // 1 berarti tidak masuk cart
+            $customerOrder->user_id = $curr_user;
+            
+        }else{
+            // dd($request);
+            $customerOrder = new CustomerOrder;
+            $customerOrder->catalog_id = $request->catalog_id;
+            // $customerOrder->shipping_address = $request->address;
+            // $customerOrder->grand_total = $request->total;
+            $customerOrder->price = $request->unitPrice;
+            $customerOrder->quantity = $request->quantity;
+            $customerOrder->sales_order_id = 0; 
+            $customerOrder->status = 1; // 1 berarti tidak masuk cart
+            $customerOrder->user_id = $curr_user;
+
+            $salesOrder = new SalesOrder;
+            $salesOrder->no_sale_invoice = 'inv-'.$curr_user.'-'.$request->catalog_id.'-'.$curdate->toArray()['timestamp'];
+            $salesOrder->invoice_date = $curdate->toArray()['formatted'];
+            $salesOrder->customer_name = $request->customerName;
+            $salesOrder->shipping_address = $request->address;
+            $salesOrder->grand_total = $request->total;
+            $salesOrder->user_id = $umkm[0]->id_umkm;
+            $salesOrder->customer_id = $curr_user;
+
+            // $salesOrder->courier_id = 0;
+            $salesOrder->status = 0;
+            $curr_user = Auth::user()->id;
+            
+        }
+
+
+        if($customerOrder->save()){
+            $salesOrder->save();
+            $customerOrder->sales_order_id = $salesOrder->id;
+            $customerOrder->save();
+
             // return back()->with('success', 'Selamat Data dimasukan!');
            return redirect('https://wa.me/+62'.$umkm[0]->phone.'?text=Halo,%20Saya'.'%20'.$request->customerName.'.%20Ingin%20Mengkonfirmasi%20Untuk%20Pesanan%20'.$umkm[0]->product_name.',%20Dengan%20Total%20'.$request->total.'.');
         }else{
@@ -353,6 +392,41 @@ class KonsumenController extends Controller
 
         return view(
             'konsumen.dashboard',
+            [
+                'menu'=>$menu,
+                'dataContent'=>$dataContent
+            ]
+        );
+        
+    }
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order()
+    {
+        
+        $curr_user = Auth::user()->id;
+        $this->id = $curr_user;
+
+        $menu = SidebarHelper::list(Auth::user()->role_id);
+
+        $dataContent = DB::table('sales_orders')
+            ->select('catalogs.*','customer_orders.*','users.*','sales_orders.*')
+            // ->join('sales_orders', 'sales_orders.id', '=', 'delivery_orders.sales_order_id')
+            ->join('customer_orders', 'sales_orders.id', '=', 'customer_orders.sales_order_id')
+            ->join('catalogs', 'catalogs.id', '=', 'customer_orders.catalog_id')
+            ->join('users','catalogs.user_id','=','users.id')
+            // ->where('customer_orders.status','IN','(1,2)')
+            ->where('sales_orders.customer_id','=',$curr_user)
+            ->get();
+
+            // dd($dataContent);
+
+        return view(
+            'konsumen.order',
             [
                 'menu'=>$menu,
                 'dataContent'=>$dataContent

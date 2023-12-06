@@ -13,8 +13,8 @@
           </a>
           <ul class="navbar-nav">
             <li class="nav-item active"><a href="/konsumen/dashboard" class="nav-link">Home</a></li>
-            <!-- <li class="nav-item"><a href="#" class="nav-link">History</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pesanan</a> -->
+            <!-- <li class="nav-item"><a href="#" class="nav-link">History</a></li> -->
+            <li class="nav-item"><a href="/konsumen/order" class="nav-link">Pesanan</a>
             </li>
           </ul>
         </div>
