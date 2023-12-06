@@ -12,6 +12,15 @@
             </div>
           </div>
 
+          <form class="form" method="post" action="{{ route('search') }}">
+            @csrf
+            <div class="form-group w-100 mb-3">
+                <label for="search" class="d-block mr-2">Pencarian</label>
+                <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="">
+                <button type="submit" class="btn btn-primary mb-1">Cari</button>
+            </div>
+        </form>
+
           <div class="section-body">
             <h2 class="section-title">Catalog</h2>
             <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->

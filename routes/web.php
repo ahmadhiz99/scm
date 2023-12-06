@@ -169,5 +169,8 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     Route::get('profile',[KonsumenController::class,'profile']);
     Route::post('edit-profile',[KonsumenController::class,'editProfile']);
 
+    Route::post('search',[KonsumenController::class,'search'])->name('search');
+
+
 });
 

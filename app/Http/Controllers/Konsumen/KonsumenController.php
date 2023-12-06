@@ -329,4 +329,36 @@ class KonsumenController extends Controller
             return back()->with('failed', 'Maaf Data dimasukan!');
         }    
     }
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $keyword = '%'.$request->search.'%';
+
+        $curr_user = Auth::user()->id;
+        $this->id = $curr_user;
+
+        $menu = SidebarHelper::list(Auth::user()->role_id);
+
+        $dataContent = DB::table('catalogs')
+            ->select('catalog_categories.*','users.*','catalogs.*')
+            ->join('users', 'users.id', '=', 'catalogs.user_id')
+            ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
+            ->where('catalogs.product_name','like',$keyword)
+            ->get();
+
+        return view(
+            'konsumen.dashboard',
+            [
+                'menu'=>$menu,
+                'dataContent'=>$dataContent
+            ]
+        );
+        
+    }
+
 }
