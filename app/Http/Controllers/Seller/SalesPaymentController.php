@@ -12,6 +12,9 @@ use App\Helpers\TableHelper;
 use App\Models\Material;
 use App\Models\SalesPayment;
 use App\Models\SalesOrder;
+use App\Models\CustomerOrder;
+use App\Models\Catalog;
+
 
 class SalesPaymentController extends Controller
 {
@@ -34,8 +37,8 @@ class SalesPaymentController extends Controller
         return SalesPayment::find($id);
     }
 
-    public function configDB_sales_order_all(){
-        return SalesOrder::all();
+    public function configDB_sales_order_all($id){
+        return SalesOrder::where('user_id','=',$id)->get();
     }
 
     public function configDB_sales_order(){
@@ -59,10 +62,9 @@ class SalesPaymentController extends Controller
 
         $db_all = $this->configDB_all();
         $db_new = $this->configDB_new();
-        $db_sales_order_all = $this->configDB_sales_order_all();        
+        $curr_user = Auth::user()->id;
+        $db_sales_order_all = $this->configDB_sales_order_all($curr_user);        
 
-        // Inisiate Data
-                
         // Datatable
         $tableConfig = [
             'field_block' => [
@@ -302,7 +304,6 @@ class SalesPaymentController extends Controller
         );
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -318,15 +319,29 @@ class SalesPaymentController extends Controller
             if($key == '_token')continue;
             $db_new->$key = $data;            
         }
-            $db_new->user_id = $curr_user;            
+            $db_new->user_id = $curr_user;   
+            
+            $data = DB::table('sales_orders')
+            ->select('sales_orders.*','customer_orders.*','catalogs.*')
+            ->join('customer_orders', 'customer_orders.sales_order_id', '=', 'sales_orders.id')
+            ->join('catalogs', 'customer_orders.catalog_id', '=', 'catalogs.id')
+            ->where('sales_orders.id','=',$db_new->sales_order_id)
+            ->get()[0];
 
+            $catalog = Catalog::where('id','=',$data->catalog_id)->get()[0];
+            $catalog->stock -= $data->quantity;
+            $catalog->save();
 
+            $sales_order = SalesOrder::where('id','=',$data->sales_order_id)->get()[0];
+            $sales_order->status = 2;
+            $sales_order->save();
+
+            // dd($db_new);
 
         if($db_new->save()){
             return back()->with('success', 'Selamat Data dimasukan!');
         }else{
             return back()->with('failed', 'Selamat Data dimasukan!');
-
         }
         // dd($db_new);
     }
@@ -347,7 +362,7 @@ class SalesPaymentController extends Controller
             if($key == '_token')continue;
             $db_find->$key = $data;            
         }
-            $db_find->user_id = $curr_user;            
+            $db_find->user_id = $curr_user;   
 
         if($db_find->save()){
             return back()->with('success', 'Selamat Data dimasukan!');

@@ -12,8 +12,6 @@ use App\Helpers\TableHelper;
 use App\Models\Catalog;
 use App\Models\CatalogCategory;
 
-
-
 class CatalogController extends Controller
 {
     /**

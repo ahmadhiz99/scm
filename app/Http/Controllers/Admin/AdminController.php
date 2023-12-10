@@ -15,8 +15,6 @@ use App\Models\ProductionOrder;
 use App\Models\Material;
 use App\Models\CustomerOrder;
 
-
-
 use Illuminate\Support\Facades\DB;
 use App\Helpers\TableHelper;
 
