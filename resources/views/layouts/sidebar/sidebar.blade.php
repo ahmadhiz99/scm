@@ -4,7 +4,7 @@
             <a href="index.html">UMKM Gerabah Kasongan</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">SCA</a>
+            <a href="index.html">UGK</a>
         </div>
         
         @foreach($menu as $key => $data)
