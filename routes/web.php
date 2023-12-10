@@ -38,8 +38,13 @@ use App\Http\Controllers\Profile\ProfileController;
 |
 */
 
+
+Route::get('dashboard-guest',[KonsumenController::class,'dashboard_guest'])->name('konsumen.dashboard-guest');
+
 Route::get('/', function () {
-    return redirect('/login');
+    // return redirect('/login');
+    return redirect('/dashboard-guest');
+    // return 'tes';
 });
 
 // Auth::routes();
@@ -174,9 +179,4 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     Route::get('order',[KonsumenController::class,'order'])->name('order');
     Route::get('detail-order/{id}',[KonsumenController::class,'detail'])->name('order.detail');
     Route::get('store/{id}',[KonsumenController::class,'store'])->name('order.store');
-
-
-
-
 });
-

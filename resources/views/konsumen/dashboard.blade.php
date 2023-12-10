@@ -57,7 +57,7 @@
                               </div>
                               <img 
                                 src="{{ asset('images/'.$data->image) }}"
-                                class="card-img-top" alt="Laptop" />
+                                class="card-img-top" alt="Laptop" widht="200" height="200" />
                                 
                               <div class="card-body">
 
