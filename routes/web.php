@@ -173,6 +173,8 @@ Route::group(['prefix'=>'konsumen', 'middleware'=>['isKonsumen','auth','PreventB
     Route::get('searchCatalog/{catageoryCatalog}',[KonsumenController::class,'searchCatalog'])->name('searchCatalog');
     Route::get('order',[KonsumenController::class,'order'])->name('order');
     Route::get('detail-order/{id}',[KonsumenController::class,'detail'])->name('order.detail');
+    Route::get('store/{id}',[KonsumenController::class,'store'])->name('order.store');
+
 
 
 

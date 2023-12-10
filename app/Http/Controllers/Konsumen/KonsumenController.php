@@ -74,6 +74,8 @@ class KonsumenController extends Controller
             ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
             ->get();
 
+            // dd($dataContent);
+
         return view(
             'konsumen.dashboard',
             [
@@ -102,6 +104,39 @@ class KonsumenController extends Controller
             [
                 'menu'=>$menu,
                 'data'=>$data
+            ]
+        );
+    }
+
+      /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store($id)
+    {
+        $menu = SidebarHelper::list(Auth::user()->role_id);
+        $curr_user = Auth::user()->id;
+
+        // $data = Catalog::find($id);
+
+        $dataContent = DB::table('catalogs')
+            ->select('catalog_categories.*','users.*','catalogs.*')
+            ->join('users', 'users.id', '=', 'catalogs.user_id')
+            ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
+            ->where('users.id','=',$id)
+            ->get();
+
+        $user = User::find($id);
+
+            // dd($profile);
+
+        return view(
+            'konsumen.store',
+            [
+                'menu'=>$menu,
+                'dataContent'=>$dataContent,
+                'user'=>$user
             ]
         );
     }
@@ -403,7 +438,6 @@ class KonsumenController extends Controller
         );
         
     }
-
 
      /**
      * Show the form for creating a new resource.

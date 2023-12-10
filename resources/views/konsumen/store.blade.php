@@ -12,18 +12,74 @@
             </div>
           </div>
 
-          <form class="form" method="post" action="{{ route('search') }}">
-            @csrf
-            <div class="form-group w-100 mb-3">
-                <label for="search" class="d-block mr-2">Pencarian</label>
-                <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="">
-                <button type="submit" class="btn btn-primary mb-1">Cari</button>
+  <!-- profile -->
+  <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-6 col-3">
+              <div class="card card-statistic-1">
+              
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4></h4>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                      <img class="mr-3 rounded-circle" width="80" src="../stisla/assets/img/avatar/avatar-1.png" alt="avatar">
+                    </div>
+                  <ul class="list-unstyled list-unstyled-border">
+                    <li class="media d-flex justify-content-center">
+                      <div class="media-body">
+                        <div class="media-title">
+
+                          <form action="/konsumen/edit-profile" method="POST">
+                            @csrf
+                            <div class="form-group">
+                              <label for="exampleInputName1">Name</label>
+                              <input disabled name="name" type="text" class="form-control" id="exampleInputName1" aria-describedby="NameHelp" value="{{$user->name}}" placeholder="Enter Name">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPhone1">Phone</label>
+                              <input disabled name="phone" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="PhoneHelp" value="{{$user->phone}}" placeholder="Enter Phone">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email</label>
+                              <input disabled name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="EmailHelp" value="{{$user->email}}" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputAddress1">Alamat</label>
+                              <input disabled name="address" type="text" class="form-control" id="exampleInputAddress1" aria-describedby="AddressHelp" value="{{$user->address}}" placeholder="Enter Address">
+                            </div>
+                            <!-- <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input disabled name="password" type="password" class="form-control" id="exampleInputPassword1" value="{{$user->password}}" placeholder="Password">
+                            </div> -->
+                            <div class="form-group">
+                              <label for="exampleInputRekening1">Rekening</label>
+                              <input disabled name="rekening" type="text" class="form-control" id="exampleInputRekening1" aria-describedby="RekeningHelp" value="{{$user->rekening}}" placeholder="Enter Rekening">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputBank1">Bank</label>
+                              <input disabled name="bank" type="text" class="form-control" id="exampleInputBank1" aria-describedby="BankHelp" value="{{$user->bank}}" placeholder="Enter Bank">
+                            </div>
+                            <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+                          </form>
+
+                        </div>
+                        <!-- <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span> -->
+                      </div>
+                    </li>
+                    
+                  </ul>
+                  
+                  </div>
+                </div>
+              </div>
             </div>
-        </form>
+          </div>
+  <!-- profile -->
 
           <div class="section-body">
-            <h2 class="section-title">Catalog</h2>
-            <p class="section-lead">{{$message}}</p>
+            <h2 class="section-title">Catalog {{$user->name}}</h2>
             <div class="card">
               <!-- <div class="card-header">
                 <h4>Catalog Umum</h4>
