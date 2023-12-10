@@ -333,7 +333,7 @@ class SalesPaymentController extends Controller
             $catalog->save();
 
             $sales_order = SalesOrder::where('id','=',$data->sales_order_id)->get()[0];
-            $sales_order->status = 2;
+            $sales_order->status = 1;
             $sales_order->save();
 
             // dd($db_new);

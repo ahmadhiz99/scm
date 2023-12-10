@@ -23,7 +23,7 @@
 
           <div class="section-body">
             <h2 class="section-title">Catalog</h2>
-            <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->
+            <p class="section-lead">{{$message}}</p>
             <div class="card">
               <!-- <div class="card-header">
                 <h4>Catalog Umum</h4>
@@ -62,7 +62,7 @@
                               <div class="card-body">
 
                                 <div class="d-flex justify-content-between">
-                                  <p class="small">Tags: <a href="#!" class="text-muted">{{$data->catalog_category_name}}</a></p>
+                                  <p class="small">Tags: <a href="searchCatalog/{{$data->catalog_category_name}}" class="text-muted">{{$data->catalog_category_name}}</a></p>
                                   <!-- <p class="small text-danger"><s>$1099</s></p> -->
                                 </div>
 

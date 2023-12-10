@@ -78,7 +78,9 @@ class KonsumenController extends Controller
             'konsumen.dashboard',
             [
                 'menu'=>$menu,
-                'dataContent'=>$dataContent
+                'dataContent'=>$dataContent,
+                'message'=>''
+
             ]
         );
         
@@ -394,7 +396,45 @@ class KonsumenController extends Controller
             'konsumen.dashboard',
             [
                 'menu'=>$menu,
-                'dataContent'=>$dataContent
+                'dataContent'=>$dataContent,
+                'message'=>''
+
+            ]
+        );
+        
+    }
+
+
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchCatalog($catageoryCatalog)
+    {
+        $keyword = '%'.$catageoryCatalog.'%';
+
+        $curr_user = Auth::user()->id;
+        $this->id = $curr_user;
+
+        $menu = SidebarHelper::list(Auth::user()->role_id);
+
+        $dataContent = DB::table('catalog_categories')
+            ->select('catalog_categories.*','catalogs.*','users.*')
+            ->join('catalogs', 'catalogs.catalog_category_id','=','catalog_categories.id')
+            ->join('users', 'users.id', '=', 'catalogs.user_id')
+            ->where('catalog_categories.catalog_category_name','like',$keyword)
+            // ->where('user_id','=',$curr_user)
+            ->get();
+
+            // dd($dataContent);
+
+        return view(
+            'konsumen.dashboard',
+            [
+                'menu'=>$menu,
+                'dataContent'=>$dataContent,
+                'message'=>'Hasil Pencaraian Catalog Category: '.$catageoryCatalog
             ]
         );
         
