@@ -28,6 +28,8 @@ use App\Http\Controllers\Konsumen\KonsumenController;
 use App\Http\Controllers\Suplier\SuplierController;
 
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Konsumen\KonsumenGuestController;
+
 use App\Models\Catalog;
 
 /*
@@ -42,28 +44,29 @@ use App\Models\Catalog;
 */
 
 
-Route::get('dashboard-guest',[KonsumenController::class,'dashboard_guest'])->name('konsumen.dashboard-guest');
+Route::get('/',[KonsumenGuestController::class,'dashboard_guest'])->name('konsumen.dashboard-guest');
+Route::post('searchGuest',[KonsumenGuestController::class,'search'])->name('searchGuest');
 
-Route::get('/', function () {
-    // return redirect('/login');
+// Route::get('/', function () {
+//     // return redirect('/login');
 
-    $dataContent = Catalog::all();
+//     $dataContent = Catalog::all();
 
-    $dataContent = DB::table('catalogs')
-    ->select('catalog_categories.*','users.*','catalogs.*')
-    ->join('users', 'users.id', '=', 'catalogs.user_id')
-    ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
-    ->get();
+//     $dataContent = DB::table('catalogs')
+//     ->select('catalog_categories.*','users.*','catalogs.*')
+//     ->join('users', 'users.id', '=', 'catalogs.user_id')
+//     ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
+//     ->get();
 
-    return view('konsumen.guest',
-                [
-                'message' => 'Please Login',
-                'dataContent' => $dataContent
-                ]);
-    // return redirect('login');
+//     return view('konsumen.guest',
+//                 [
+//                 'message' => 'Please Login',
+//                 'dataContent' => $dataContent
+//                 ]);
+//     // return redirect('login');
 
-    // return 'tes';
-});
+//     // return 'tes';
+// });
 
 // Auth::routes();
 

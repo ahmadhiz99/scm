@@ -5,13 +5,27 @@
 <section class="section p-5">
           <div class="section-header">
         
+
+    
+
           <div class="section-body">
-            <h2 class="section-title">Catalog</h2>
+            <h2 class="section-title"></h2>
             <div class="card">
               <!-- <div class="card-header">
                 <h4>Catalog Umum</h4>
               </div> -->
               <div class="card-body">
+
+              <form class="form" method="post" action="{{ route('searchGuest') }}">
+                  @csrf
+                  <div class="form-group w-100 mb-3">
+                      <label for="search" class="d-block mr-2">Pencarian</label>
+                      <input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="">
+                      <button type="submit" class="btn btn-primary mb-1">Cari</button>
+                  </div>
+              </form>
+
+              <h3>Catalog</h3>
                 
                 <div class="flex-wrap d-flex ">
                   @foreach($dataContent as $data)
