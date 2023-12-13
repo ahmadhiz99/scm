@@ -69,6 +69,7 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
+        //dd('test');
         // $cust_order = CustomerOrder::all();
 
         // $i = 0;

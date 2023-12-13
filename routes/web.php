@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Seller\SellerController;
@@ -26,6 +28,7 @@ use App\Http\Controllers\Konsumen\KonsumenController;
 use App\Http\Controllers\Suplier\SuplierController;
 
 use App\Http\Controllers\Profile\ProfileController;
+use App\Models\Catalog;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +46,22 @@ Route::get('dashboard-guest',[KonsumenController::class,'dashboard_guest'])->nam
 
 Route::get('/', function () {
     // return redirect('/login');
-    return redirect('/dashboard-guest');
+
+    $dataContent = Catalog::all();
+
+    $dataContent = DB::table('catalogs')
+    ->select('catalog_categories.*','users.*','catalogs.*')
+    ->join('users', 'users.id', '=', 'catalogs.user_id')
+    ->join('catalog_categories', 'catalog_categories.id', '=', 'catalogs.catalog_category_id')
+    ->get();
+
+    return view('konsumen.guest',
+                [
+                'message' => 'Please Login',
+                'dataContent' => $dataContent
+                ]);
+    // return redirect('login');
+
     // return 'tes';
 });
 
