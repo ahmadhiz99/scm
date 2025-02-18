@@ -1,0 +1,66 @@
+"id","product_name","stock","unit_price","image","description","status","catalog_category_id","user_id","created_at","updated_at"
+"1","product1","12","12000","1739877094.jpg","test","1","1","3","2025-02-18 11:11:34","2025-02-18 11:11:34"
+"id","user_id","catalog_category_name","created_at","updated_at","deleted_at"
+"1","3","kategori 1","2025-02-18 09:15:44","2025-02-18 09:15:44",NULL
+"category_id","name","description","created_at"
+"id","user_id","courier_name","courier_address","courier_phone","courier_email","created_at","updated_at","deleted_at"
+"1","3","kurir 1","kurir addres","099999","kurir@mail.com","2025-02-18 11:14:25","2025-02-18 11:14:25",NULL
+"customer_id","name","email","phone_number","created_at"
+"id","user_id","catalog_id","quantity","price","note","sales_order_id","status","created_at","updated_at","deleted_at"
+"id","quantity","delivery_date","courier","status","description","height","weight","sales_order_id","user_id","created_at","updated_at","deleted_at"
+"id","material_name","stock","unit","price","description","status","material_category_id","user_id","created_at","updated_at","deleted_at"
+"1","material","11","11","11000","test","SAFE","1","3","2025-02-18 11:13:34","2025-02-18 11:13:34",NULL
+"id","material_category_name","user_id","created_at","updated_at","deleted_at"
+"1","category material 1","3","2025-02-18 11:13:04","2025-02-18 11:13:04",NULL
+"id","migration","batch"
+"1","2014_10_12_100000_create_password_resets_table","1"
+"2","2019_12_14_000001_create_personal_access_tokens_table","1"
+"3","2023_09_05_085200_create_roles_table","1"
+"4","2023_09_05_085239_create_users_table","1"
+"5","2023_09_05_085322_create_suppliers_table","1"
+"6","2023_09_05_085354_create_material_categories_table","1"
+"7","2023_09_05_085423_create_materials_table","1"
+"8","2023_09_05_085501_create_production_orders_table","1"
+"9","2023_09_05_085559_create_catalog_categories_table","1"
+"10","2023_09_05_085624_create_catalogs_table","1"
+"11","2023_09_05_085719_create_production_items_table","1"
+"12","2023_09_05_085747_create_production_item_materials_table","1"
+"13","2023_09_05_085827_create_purchase_orders_table","1"
+"14","2023_09_05_085905_create_purchase_materials_table","1"
+"15","2023_09_05_085945_create_purchase_payments_table","1"
+"16","2023_09_05_090032_create_couriers_table","1"
+"17","2023_09_05_090115_create_sales_orders_table","1"
+"18","2023_09_05_090203_create_sales_order_payments_table","1"
+"19","2023_09_05_090252_create_customer_orders_table","1"
+"20","2023_09_05_090420_create_delivery_orders_table","1"
+"order_id","customer_id","order_date","total_amount"
+"order_detail_id","order_id","product_id","quantity","price"
+"email","token","created_at"
+"ahmadhiz2000@gmail.com","$2y$10$/HVY9iAtErs45i4UwbjFG.WSQ5P/CYJeZTwD5apjCZ0V89Y.KFg/K","2024-12-22 10:54:09"
+"id","tokenable_type","tokenable_id","name","token","abilities","last_used_at","created_at","updated_at"
+"id","item_name","quantity","unit_price","image","description","catalog_category_id","catalog_id","production_order_id","created_at","updated_at","deleted_at"
+"id","production_item_id","material_id","created_at","updated_at","deleted_at"
+"id","no_production","start_date","end_date","quantity","requester_name","description","status","user_id","created_at","updated_at","deleted_at"
+"1","1","2024-07-30","2024-08-09","100","Gelas",NULL,"1","1","2024-07-28 09:49:06","2024-07-28 09:49:06",NULL
+"2","123","2025-02-18","2025-02-22","12","test nama",NULL,"1","3","2025-02-18 09:15:24","2025-02-18 09:15:24",NULL
+"product_id","name","description","price","stock","created_at"
+"product_category_id","product_id","category_id"
+"id","material_id","quantity","unit","unit_price","note","purchase_order_id","created_at","updated_at","deleted_at"
+"id","no_purchase_invoice","purchase_date","receive_date","requester_name","grand_total","payment_total","status","supplier_id","user_id","created_at","updated_at","deleted_at"
+"1","123123","2025-02-18","2025-02-18","test nama","12000","12000","1","1","3","2025-02-18 11:16:49","2025-02-18 11:16:49",NULL
+"id","user_id","purchase_order_id","payer_name","nominal","payment_method","payment_date","status","created_at","updated_at","deleted_at"
+"1","3","1","name","12000","BCA","2025-02-18","1","2025-02-18 11:17:26","2025-02-18 11:17:26",NULL
+"id","role_name","level","created_at","updated_at","deleted_at"
+"1","admin","1","2024-07-28 08:47:11",NULL,NULL
+"2","umkm","2","2024-07-28 08:47:11",NULL,NULL
+"3","customer","3","2024-07-28 08:47:11",NULL,NULL
+"id","no_sale_invoice","invoice_date","due_date","customer_name","shipping_address","grand_total","courier_id","status","user_id","customer_id","created_at","updated_at","deleted_at"
+"1","1231","2025-02-18","2025-02-18","test","adasd","12000","1","1","3","1","2025-02-18 13:13:15","2025-02-18 13:13:15",NULL
+"id","sales_order_id","payer_name","nominal","payment_method","payment_date","status","created_at","updated_at","deleted_at"
+"id","user_id","sales_order_id","payer_name","nominal","payment_date","status","created_at","updated_at"
+"id","supplier_name","supplier_address","supplier_phone","supplier_email","user_id","created_at","updated_at","deleted_at"
+"1","supplier 1","supplier address 1","088888","supplier@gmail.com","3","2025-02-18 11:15:30","2025-02-18 11:15:30",NULL
+"id","name","fullname","phone","address","email","password","rekening","bank","role_id","remember_token","created_at","updated_at","deleted_at"
+"1","test",NULL,NULL,NULL,"ahmadhiz2000@gmail.com","$2y$10$bTHYg7fZlGxHg2kVVRPi4uC9GAPQ1cC1xSeCmxbBGjOB1FANsIT72",NULL,NULL,"3","HorONa4yFAJsnVR6N8iC8Pe6Bt8ay5QZC04XY1DZt3JOpYeGIklcUm7Q68U2","2024-07-28 09:41:05","2024-12-22 01:39:25",NULL
+"2","admin",NULL,NULL,NULL,"admin@gmail.com","$2y$10$NZA1G30XkYP.WYiAOz0kmOiM94nX.PLi7mANyDWBWh9h95sbUwooy",NULL,NULL,"1",NULL,"2024-07-28 09:41:05","2024-07-28 09:41:05",NULL
+"3","umkm",NULL,NULL,NULL,"umkm@gmail.com","$2y$10$NZA1G30XkYP.WYiAOz0kmOiM94nX.PLi7mANyDWBWh9h95sbUwooy",NULL,NULL,"2",NULL,"2024-07-28 09:41:05","2024-07-28 09:41:05",NULL

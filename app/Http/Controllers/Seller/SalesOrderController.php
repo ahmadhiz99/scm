@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Helpers\SidebarHelper;
 use App\Helpers\TableHelper;
-
+use App\Models\Courier;
+use App\Models\User;
 use App\Models\Material;
 use App\Models\SalesOrder;
 
@@ -52,6 +53,9 @@ class SalesOrderController extends Controller
     {        
         // Menu
         $menu = SidebarHelper::list(Auth::user()->role_id);
+
+        $courier = Courier::all();
+        $customer = User::where('role_id',3)->get();
 
         $db_all = $this->configDB_all();
         $db_new = $this->configDB_new();
@@ -147,19 +151,67 @@ class SalesOrderController extends Controller
                     'type' => 'number',
                     'placeholder' => 'grand_total'
                 ],
+                // 'courier_id' => [
+                //     'name' => 'courier_id',
+                //     'title' => 'courier_id',
+                //     'tag' => 'input',
+                //     'type' => 'number',
+                //     'placeholder' => 'courier_id'
+                // ],
                 'courier_id' => [
                     'name' => 'courier_id',
-                    'title' => 'courier_id',
-                    'tag' => 'input',
-                    'type' => 'number',
-                    'placeholder' => 'courier_id'
+                    'title' => 'Status Data',
+                    'tag' => 'option',
+                    'type' => 'option',
+                    'option-config' => [
+                        'option-title' => 'courier_name',
+                        'option-reference' => 'id',
+                        'option-content' => $courier
+                    ],
+                    'placeholder' => 'Status Data'
                 ],
+                'customer_id' => [
+                    'name' => 'customer_id',
+                    'title' => 'Status Data',
+                    'tag' => 'option',
+                    'type' => 'option',
+                    'option-config' => [
+                        'option-title' => 'name',
+                        'option-reference' => 'id',
+                        'option-content' => $customer
+                    ],
+                    'placeholder' => 'Status Data'
+                ],
+                // 'status' => [
+                //     'name' => 'status',
+                //     'title' => 'status',
+                //     'tag' => 'input',
+                //     'type' => 'text',
+                //     'placeholder' => 'status'
+                // ],
                 'status' => [
                     'name' => 'status',
-                    'title' => 'status',
-                    'tag' => 'input',
-                    'type' => 'text',
-                    'placeholder' => 'status'
+                    'title' => 'Status Data',
+                    'tag' => 'option',
+                    'type' => 'option',
+                    'option-config' => [
+                        'option-title' => 'title',
+                        'option-reference' => 'id',
+                        'option-content' => [
+                            [
+                                'id' => '1',
+                                'name' => 'active',
+                                'value' => 'active',
+                                'title' => 'Active'
+                            ],
+                            [
+                                'id' => '2',
+                                'name' => 'non_active',
+                                'value' => 'non_active',
+                                'title' => 'Non Active'
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'form-edit' => [
